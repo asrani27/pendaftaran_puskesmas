@@ -9,7 +9,7 @@
     <meta name="author" content="Grayrids">
     <title>PENDAFTARAN ONLINE BAAPIK</title>
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="/baapik/img/2.png" type="image/png">
+    <link rel="shortcut icon" href="/baapik/img/Baapik2.png" type="image/png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/baapik/css/bootstrap.min.css">
     <link rel="stylesheet" href="/baapik/css/animate.css">
@@ -31,14 +31,14 @@
         </div>
         <nav class="navbar navbar-expand-md bg-inverse fixed-top scrolling-navbar">
           <div class="container">
-            <a href="/" class="navbar-brand"><img src="/baapik/img/logo.png" alt=""></a>       
+            <a href="/" class="navbar-brand"><img src="/baapik/img/Baapik2.png" alt=""></a>       
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
               <i class="lni-menu"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
               <ul class="navbar-nav mr-auto w-100 justify-content-end">
                 <li class="nav-item">
-                  <img src="/baapik/img/google.png" width="180px"> &nbsp;
+                  <img src="/baapik/img/Baapik2.png" width="180px"> &nbsp;
                 </li>
       
                 {{-- <li class="nav-item">

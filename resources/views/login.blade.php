@@ -7,24 +7,25 @@
             <div class="panel-body nopadding">
                 <div class="row">						
                     <div class="col-lg-12">								
-                        <form id="login_form" autocomplete="off">		
+                        <form id="login_form" method="POST" action="/login">
+                            @csrf		
                             <div class="login_logo">Masuk BaApik</div>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>	
-                                        <input type="email" class="form-control input input-lg" placeholder="Your Email"  autocomplete="off" required>
+                                        <input type="text" name="username" class="form-control input input-lg" placeholder="Email / Username" required>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>	
-                                        <input type="password" class="form-control input input-lg" placeholder="Your Password"  autocomplete="off" required>
+                                        <input type="password" name="password" class="form-control input input-lg" placeholder="Password Anda" required>
                                     </div>
                                 </div>
                                                                         
                                 <div class="butn">
-                                    <button class="btn btn-primary btn-block btn-lg"><i class="fas fa-sign-in-alt"></i> Masuk</button>
+                                    <button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fas fa-sign-in-alt"></i> Masuk</button>
                                 </div>
                                         
     

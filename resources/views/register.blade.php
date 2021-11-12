@@ -7,37 +7,60 @@
             <div class="panel-body nopadding">
                 <div class="row">						
                     <div class="col-lg-12">								
-                        <form id="login_form" autocomplete="off">		
+                        <form id="login_form" autocomplete="off" method="POST" action="/register">
+                            @csrf		
                             <div class="login_logo">Daftar BaApik</div>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user registration_form_icons"></i></span>	
-                                        <input type="text" class="form-control input input-lg" placeholder="Nama Lengkap"  required/>
+                                        <input type="text" class="form-control input input-lg" name='name' value="{{old('name')}}" placeholder="Nama Lengkap"  />
                                     </div>
+                                    @error('name')
+                                    <span class="text-danger"><strong>{{$message}}</strong></span>
+                                    @enderror
                                 </div>
                                 
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user registration_form_icons"></i></span>	
+                                        <input type="text" class="form-control input input-lg" name='username' value="{{old('username')}}" placeholder="Username" />
+                                    </div>
+                                    @error('username')
+                                    <span class="text-danger"><strong>{{$message}}</strong></span>
+                                    @enderror
+                                </div>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope registration_form_icons"></i></span>	
-                                        <input type="email" class="form-control input input-lg" name="email" placeholder="Email Anda"  required autocomplete="off">
+                                        <input type="text" class="form-control input input-lg" name="email" value="{{old('email')}}" placeholder="Email Anda">
+                                        
                                     </div>
+                                    @error('email')
+                                    <span class="text-danger"><strong>{{$message}}</strong></span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock registration_form_icons"></i></span>	
-                                        <input type="password" class="form-control input input-lg" name="password1" placeholder="Password Anda" autocomplete="off" required>
+                                        <input type="password" class="form-control input input-lg" name="password" placeholder="Password Anda">
                                     </div>
+                                    @error('password')
+                                    <span class="text-danger"><strong>{{$message}}</strong></span>
+                                    @enderror
                                 </div>
                                 
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock registration_form_icons"></i></span>	
-                                        <input type="password" class="form-control input input-lg" name="password2" placeholder="Konfirmasi Password" autocomplete="off" required>
+                                        <input type="password" class="form-control input input-lg" name="password_confirmation" placeholder="Konfirmasi Password">
                                     </div>
+                                    @error('password_confirmation')
+                                    <span class="text-danger"><strong>{{$message}}</strong></span>
+                                    @enderror
                                 </div>
 
                                 <div class="butn">
-                                    <button class="btn btn-primary btn-block btn-lg"><i class="fas fa-save"></i> Daftar</button>
+                                    <button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fas fa-save"></i> Daftar</button>
                                 </div>
                                         
     

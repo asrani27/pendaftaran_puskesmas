@@ -34,7 +34,7 @@
       </div>
       <nav class="navbar navbar-expand-md bg-inverse fixed-top scrolling-navbar">
         <div class="container">
-          <a href="index.html" class="navbar-brand"><img src="/baapik/img/logo.png" alt=""></a>       
+          <a href="index.html" class="navbar-brand"><img src="/baapik/img/Baapik2.png" alt="" width="168px;"></a>       
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <i class="lni-menu"></i>
           </button>
