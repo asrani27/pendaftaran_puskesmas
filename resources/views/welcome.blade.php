@@ -59,7 +59,8 @@
             <div class="contents">
               <h2 class="head-title">Banjarmasin Aplikasi <br>Pasien Internal Kesehatan </h2>
               <p>Bisa mendaftarkan diri dan keluarga dimana saja dan kapan saja, klik tombol di bawah ini :</p>
-              <a href="#" class="btn btn-border-filled" style="width: 290px;"><i class="lni-heart"></i> PENDAFTARAN PASIEN ONLINE</a>
+              <a href="/login" class="btn btn-border-filled" style="width: 290px;"><i class="fas fa-edit"></i> PENDAFTARAN PASIEN ONLINE</a>
+              <a href="#" class="btn btn-border" style="width: 290px;"><i class="fas fa-book"></i> BUKU PANDUAN</a>
               <div class="header-button">
               </div>
             </div>
