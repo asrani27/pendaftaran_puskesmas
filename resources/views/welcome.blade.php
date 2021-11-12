@@ -7,7 +7,7 @@
     <meta name="keywords" content="Bootstrap, Landing page, Template, Business, Service">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Grayrids">
-    <title>Slick - Bootstrap 4 Template</title>
+    <title>BaApik - Aplikasi Puskesmas</title>
     <!--====== Favicon Icon ======-->
     <link rel="shortcut icon" href="/baapik/img/2.png" type="image/png">
     <!-- Bootstrap CSS -->
