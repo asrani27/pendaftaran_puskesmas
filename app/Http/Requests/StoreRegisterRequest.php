@@ -30,6 +30,7 @@ class StoreRegisterRequest extends FormRequest
             'password' => 'required|confirmed|min:8',
         ];
     }
+    
     // public function messages()
     // {
     //     return [

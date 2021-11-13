@@ -19,7 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var string[]
      */
     
-    protected $guarded = ['id','email_verified_at'];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,5 +42,15 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function setPasswordAttribute($password) {
         $this->attributes['password'] = Hash::make($password);
+    }
+    
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_users');
+    }
+
+    public function hasRole($role)
+    {
+        return $this->roles()->where('name', $role)->count() == 1;
     }
 }

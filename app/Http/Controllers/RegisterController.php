@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreRegisterRequest;
 
 class RegisterController extends Controller
@@ -15,17 +17,22 @@ class RegisterController extends Controller
     
     public function register(StoreRegisterRequest $req)
     {
+        $role = Role::where('name','user')->first();
         $attr = $req->all();
+        $attr['email_verified_at'] = null;
         
-        User::create($attr);
+        $u = User::create($attr);
+        $u->roles()->attach($role);
 
-        $email = 'Ke '.$req->email;
-        return view('verify_notice',compact('email'));
+        Auth::login($u);
+        return redirect('/user/home');
+        // $email = 'Ke '.$req->email;
+        // return view('verify_notice',compact('email'));
     }
 
     public function verify()
     {
-        $email = null;
+        $email = Auth::user()->email;
         return view('verify_notice',compact('email'));
     }
 }

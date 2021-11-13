@@ -36,8 +36,8 @@
                                     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <a href="#" class="btn btn-default btn-lg btn_gmail">
-                                                <i class="fas fa-envelope"></i> Gmail
+                                            <a href="#">
+                                                <img src="/baapik/img/login_google.png" width="200px">
                                             </a>
                                         </div>
                                     </div>

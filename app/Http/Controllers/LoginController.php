@@ -14,15 +14,12 @@ class LoginController extends Controller
         }
         return view('login');
     }
-    
+
     public function login()
     {
         $login = request()->input('username');
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        
         if (Auth::attempt([$field => $login, 'password' => request()->password], true)) {
-
-            dd(Auth::user()->hasVerifiedEmail());
             return redirect('/user/home');
         } else {
             toastr()->error('Username / Password Tidak Ditemukan');
