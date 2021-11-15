@@ -20,10 +20,10 @@ class EmailVerificationController extends Controller
         return back();
     }
 
-    public function verify(EmailVerificationRequest $request)
+    public function verify(EmailVerificationRequest $request, $id, $hash)
     {
         $request->fulfill();
-
+        
         return redirect()->to('/user/home');
     }
 }

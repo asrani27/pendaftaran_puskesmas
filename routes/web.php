@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/verify', [EmailVerificationController::class, 'request'])->name('verification.request');
     });
 });
+
 Route::get('/verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])
-    ->middleware(['auth', 'signed']) 
+    ->middleware(['auth','signed']) 
     ->name('verification.verify');
