@@ -40,6 +40,10 @@ Route::group(['middleware' => ['auth','verified']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::prefix('user')->group(function () {
-        Route::get('verify', [EmailVerificationController::class, 'verify'])->name('verification.notice');
+        Route::get('verify', [EmailVerificationController::class, 'show'])->name('verification.notice');
+        Route::post('/verify', [EmailVerificationController::class, 'request'])->name('verification.request');
     });
 });
+Route::get('/verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])
+    ->middleware(['auth', 'signed']) 
+    ->name('verification.verify');

@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\StoreRegisterRequest;
 
 class RegisterController extends Controller
@@ -26,8 +27,16 @@ class RegisterController extends Controller
 
         Auth::login($u);
         return redirect('/user/home');
-        // $email = 'Ke '.$req->email;
-        // return view('verify_notice',compact('email'));
+    }
+
+    public function show()
+    {
+        //
+    }
+
+    public function handle()
+    {
+        event(new Registered($user));
     }
 
     public function verify()

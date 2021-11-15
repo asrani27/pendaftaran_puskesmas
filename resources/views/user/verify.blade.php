@@ -10,11 +10,14 @@
         <div class="card-block danger-breadcrumb">
             <div class="breadcrumb-header">
                 <h5><i class="fas fa-envelope"></i> Email Belum Terverifikasi</h5>
-                <span>Anda tidak bisa menikmati fitur yang ada di Aplikasi BaApik, Silahkan verifikasi email anda terlebih dahulu, dengan membuka email anda, check di inbox atau pun spam</span>
+                <span>Email Verifikasi telah di kirim ke <strong>{{Auth::user()->email}}</strong>, buka email anda, silahkan check di inbox atau pun di spam</span>
             </div>
             <br/>
             Anda Belum menerima email verifikasi? <br/>
-            <button class="btn btn-primary btn-sm btn-round btn-grd-primary">Kirim Email Verifikasi</button>
+            <form action="{{ route('verification.request') }}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-primary btn-sm btn-round btn-grd-primary">Request Email Verifikasi</button>
+            </form>
         </div>
     </div>
     

@@ -24,6 +24,7 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="/gradient/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="/gradient/assets/css/jquery.mCustomScrollbar.css">
+	@toastr_css
 </head>
 
 <body>
@@ -73,7 +74,7 @@
                            
                            <li class="user-profile header-notification">
                                <a href="#!">
-                                   <img src="/gradient/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
+                                   <img src="/baapik/img/user.png" class="img-radius" alt="User-Profile-Image">
                                    <span>{{Auth::user()->name}}</span>
                                    <i class="ti-angle-down"></i>
                                </a>
@@ -201,6 +202,10 @@
 <script src="/gradient/assets/js/pcoded.min.js"></script>
 <script src="/gradient/assets/js/vartical-demo.js"></script>
 <script src="/gradient/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+
+@toastr_js
+@toastr_render
 </body>
 
 </html>
