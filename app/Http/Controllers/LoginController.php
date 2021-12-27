@@ -9,7 +9,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             return redirect('/user/home');
         }
         return view('login');
@@ -22,6 +22,7 @@ class LoginController extends Controller
         if (Auth::attempt([$field => $login, 'password' => request()->password], true)) {
             return redirect('/user/home');
         } else {
+            request()->flash();
             toastr()->error('Username / Password Tidak Ditemukan');
             return back();
         }
