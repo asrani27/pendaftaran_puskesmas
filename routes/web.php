@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\PasienController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\EmailVerificationController;
@@ -31,10 +32,12 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 Route::get('/verify', [RegisterController::class, 'verify']);
 
 
-Route::group(['middleware' => ['auth','verified']], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::prefix('user')->group(function () {
         Route::get('home', [HomeController::class, 'user']);
         Route::get('pendaftaran', [PendaftaranController::class, 'index']);
+        Route::get('daftarpasien', [PasienController::class, 'daftar']);
+        Route::post('checkpasien', [PasienController::class, 'checkPasien']);
     });
 });
 
@@ -46,5 +49,5 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('/verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])
-    ->middleware(['auth','signed']) 
+    ->middleware(['auth', 'signed'])
     ->name('verification.verify');

@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class EmailVerificationController extends Controller
 {
     public function show()
     {
-        return view('user.verify');
+        if (Auth::user()->email_verified_at == null) {
+            return view('user.verify');
+        } else {
+            return redirect('/user/home');
+        }
     }
 
     public function request()
@@ -23,7 +28,7 @@ class EmailVerificationController extends Controller
     public function verify(EmailVerificationRequest $request, $id, $hash)
     {
         $request->fulfill();
-        
+
         return redirect()->to('/user/home');
     }
 }

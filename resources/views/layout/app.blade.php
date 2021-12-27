@@ -5,30 +5,36 @@
     <title>BaApik</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="description" content="Gradient Able Bootstrap admin template made using Bootstrap 4. The starter version of Gradient Able is completely free for personal project." />
-    <meta name="keywords" content="flat ui, admin , Flat ui, Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description"
+        content="Gradient Able Bootstrap admin template made using Bootstrap 4. The starter version of Gradient Able is completely free for personal project." />
+    <meta name="keywords"
+        content="flat ui, admin , Flat ui, Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="codedthemes">
     <!-- Favicon icon -->
     <link rel="icon" href="/gradient/assets/images/favicon.ico" type="image/x-icon">
-    <!-- Google font--><link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="/gradient/assets/css/bootstrap/css/bootstrap.min.css">
     <!-- themify-icons line icon -->
     <link rel="stylesheet" type="text/css" href="/gradient/assets/icon/themify-icons/themify-icons.css">
-    {{-- <link rel="stylesheet" type="text/css" href="/gradient/assets/icon/font-awesome/css/font-awesome.min.css"> --}}
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    
+    {{--
+    <link rel="stylesheet" type="text/css" href="/gradient/assets/icon/font-awesome/css/font-awesome.min.css"> --}}
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="/gradient/assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="/gradient/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="/gradient/assets/css/jquery.mCustomScrollbar.css">
-	@toastr_css
+    @toastr_css
+    @stack('css')
 </head>
 
 <body>
-        <!-- Pre-loader start -->
+    <!-- Pre-loader start -->
     <div class="theme-loader">
         <div class="loader-track">
             <div class="loader-bar"></div>
@@ -40,56 +46,57 @@
         <div class="pcoded-container navbar-wrapper">
 
             <nav class="navbar header-navbar pcoded-header">
-               <div class="navbar-wrapper">
-                   <div class="navbar-logo">
-                       <a class="mobile-menu" id="mobile-collapse" href="#!">
-                           <i class="ti-menu"></i>
-                       </a>
-                       <div class="mobile-search">
-                           <div class="header-search">
-                               <div class="main-search morphsearch-search">
-                                   <div class="input-group">
-                                       <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                       <input type="text" class="form-control" placeholder="Enter Keyword">
-                                       <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                       <a href="#">
-                           <img class="img-fluid" src="/gradient/assets/images/logo.png" alt="Theme-Logo" />
-                       </a>
-                       <a class="mobile-options">
-                           <i class="ti-more"></i>
-                       </a>
-                   </div>
+                <div class="navbar-wrapper">
+                    <div class="navbar-logo">
+                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <i class="ti-menu"></i>
+                        </a>
+                        <div class="mobile-search">
+                            <div class="header-search">
+                                <div class="main-search morphsearch-search">
+                                    <div class="input-group">
+                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                        <input type="text" class="form-control" placeholder="Enter Keyword">
+                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <img class="img-fluid" src="/gradient/assets/images/logo.png" alt="Theme-Logo" />
+                        </a>
+                        <a class="mobile-options">
+                            <i class="ti-more"></i>
+                        </a>
+                    </div>
 
-                   <div class="navbar-container container-fluid">
-                       <ul class="nav-left">
-                           <li>
-                               <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
-                           </li>
-                       </ul>
-                       <ul class="nav-right">
-                           
-                           <li class="user-profile header-notification">
-                               <a href="#!">
-                                   <img src="/baapik/img/user.png" class="img-radius" alt="User-Profile-Image">
-                                   <span>{{Auth::user()->name}}</span>
-                                   <i class="ti-angle-down"></i>
-                               </a>
-                               <ul class="show-notification profile-notification">
-                                   <li>
-                                       <a href="/logout">
-                                       <i class="ti-layout-sidebar-left"></i> Logout
-                                   </a>
-                                   </li>
-                               </ul>
-                           </li>
-                       </ul>
-                   </div>
-               </div>
-           </nav>
+                    <div class="navbar-container container-fluid">
+                        <ul class="nav-left">
+                            <li>
+                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="nav-right">
+
+                            <li class="user-profile header-notification">
+                                <a href="#!">
+                                    <img src="/baapik/img/user.png" class="img-radius" alt="User-Profile-Image">
+                                    <span>{{Auth::user()->name}}</span>
+                                    <i class="ti-angle-down"></i>
+                                </a>
+                                <ul class="show-notification profile-notification">
+                                    <li>
+                                        <a href="/logout">
+                                            <i class="ti-layout-sidebar-left"></i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
@@ -143,7 +150,7 @@
 
     <!-- Warning Section Starts -->
     <!-- Older IE warning message -->
-<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
 <div class="ie-warning">
     <h1>Warning!!</h1>
     <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers
@@ -185,27 +192,28 @@
     <p>Sorry for the inconvenience!</p>
 </div>
 <![endif]-->
-<!-- Warning Section Ends -->
-<!-- Required Jquery -->
-<script type="text/javascript" src="/gradient/assets/js/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="/gradient/assets/js/jquery-ui/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/gradient/assets/js/popper.js/popper.min.js"></script>
-<script type="text/javascript" src="/gradient/assets/js/bootstrap/js/bootstrap.min.js"></script>
-<!-- jquery slimscroll js -->
-<script type="text/javascript" src="/gradient/assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
-<!-- modernizr js -->
-<script type="text/javascript" src="/gradient/assets/js/modernizr/modernizr.js"></script>
-<script type="text/javascript" src="/gradient/assets/js/modernizr/css-scrollbars.js"></script>
+    <!-- Warning Section Ends -->
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="/gradient/assets/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/gradient/assets/js/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/gradient/assets/js/popper.js/popper.min.js"></script>
+    <script type="text/javascript" src="/gradient/assets/js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="/gradient/assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="/gradient/assets/js/modernizr/modernizr.js"></script>
+    <script type="text/javascript" src="/gradient/assets/js/modernizr/css-scrollbars.js"></script>
 
-<!-- Custom js -->
-<script type="text/javascript" src="/gradient/assets/js/script.js"></script>
-<script src="/gradient/assets/js/pcoded.min.js"></script>
-<script src="/gradient/assets/js/vartical-demo.js"></script>
-<script src="/gradient/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Custom js -->
+    <script type="text/javascript" src="/gradient/assets/js/script.js"></script>
+    <script src="/gradient/assets/js/pcoded.min.js"></script>
+    <script src="/gradient/assets/js/vartical-demo.js"></script>
+    <script src="/gradient/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 
 
-@toastr_js
-@toastr_render
+    @stack('js')
+    @toastr_js
+    @toastr_render
 </body>
 
 </html>

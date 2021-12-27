@@ -21,7 +21,7 @@
 </head>
 
 <body class="fix-menu bg-primary">
-    <section class="login p-fixed d-flex text-center bg-primary">\
+    <section class="login p-fixed d-flex text-center bg-primary">
         <div class="container-fluid  bg-primary">
             <div class="row">
                 <div class="col-sm-12">
