@@ -18,7 +18,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Puskesmas</label>
                             <div class="col-sm-10">
-                                <select name="puskesmas" class="form-control">
+                                <select name="puskesmas" class="form-control" required>
                                     <option value="">-puskes-</option>
                                     <option value="banjarmasinindah" {{old('puskesmas')=='banjarmasinindah' ? 'selected'
                                         :''}}>Banjarmasin Indah</option>
@@ -38,7 +38,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">NIK</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nik" value="{{old('nik')}}">
+                                <input type="text" class="form-control" name="nik" value="{{old('nik')}}" required>
                             </div>
                         </div>
                         <div class="form-group row">
