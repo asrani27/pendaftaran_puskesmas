@@ -98,14 +98,13 @@ class PasienController extends Controller
                 ]);
 
                 //simpan ke DB Lokal
-                // $s = new Pendaftaran;
-                // $s->puskesmas = $req->db;
-                // $s->pendaftaran_id = $pendaftaran_id;
-                // $s->nama = $pasien->nama;
-                // $s->user_id = Auth::user()->id;
-                // $s->poli = DB::connection($req->db)->table('m_ruangan')->find($req->poli)->nama;
-                // $s->save();
-
+                $s = new Pendaftaran;
+                $s->puskesmas = $req->db;
+                $s->pendaftaran_id = $pendaftaran_id;
+                $s->nama = $pasien->nama;
+                $s->user_id = Auth::user()->id;
+                $s->poli = DB::connection($req->db)->table('m_ruangan')->find($req->poli)->nama;
+                $s->save();
             } else {
                 //Pasien Sudah Ada, Hanya Mendaftarkan Ke Poli
                 $pasien = DB::connection($req->db)->table('m_pasien')->where('nik', $req->nik)->first();
@@ -157,10 +156,9 @@ class PasienController extends Controller
             toastr()->success('Berhasil Disimpan');
             return redirect('/user/home');
         } catch (\Exception $e) {
-            dd($e);
             DB::connection($req->db)->rollback();
-            // toastr()->error('error');
-            // return redirect('/user/daftarpasien');
+            toastr()->error('error');
+            return redirect('/user/daftarpasien');
         }
     }
 }
