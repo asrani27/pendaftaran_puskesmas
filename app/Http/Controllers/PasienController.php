@@ -106,8 +106,6 @@ class PasienController extends Controller
                 // $s->poli = DB::connection($req->db)->table('m_ruangan')->find($req->poli)->nama;
                 // $s->save();
 
-                toastr()->success('Berhasil Disimpan');
-                return redirect('/user/home');
             } else {
                 //Pasien Sudah Ada, Hanya Mendaftarkan Ke Poli
                 $pasien = DB::connection($req->db)->table('m_pasien')->where('nik', $req->nik)->first();
