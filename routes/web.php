@@ -37,7 +37,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('home', [HomeController::class, 'user']);
         Route::get('pendaftaran', [PendaftaranController::class, 'index']);
         Route::get('daftarpasien', [PasienController::class, 'daftar']);
+        Route::get('checkpasien', function () {
+            return redirect('/user/daftarpasien');
+        });
         Route::post('checkpasien', [PasienController::class, 'checkPasien']);
+        Route::post('daftarpasien', [PasienController::class, 'simpanDaftar']);
     });
 });
 
