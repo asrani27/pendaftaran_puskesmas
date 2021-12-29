@@ -86,7 +86,7 @@ class PasienController extends Controller
                     $nomor_antrean = (int) DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', $req->tanggal)->where('ruangan_id', $req->poli)->latest()->first()->antrean + 1;
                 }
 
-                dd($req->all(), $pasien, $pendaftaran_id, $antrean);
+                dd($req->all(), $pasien, $pendaftaran_id, $nomor_antrean, $req->db);
                 //Mendaftarkan pasien Ke Pelayanan
                 DB::connection($req->db)->table('t_pelayanan')->insert([
                     'tanggal'           => $req->tanggal . ' 00:00:00',
