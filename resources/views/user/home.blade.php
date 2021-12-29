@@ -44,12 +44,11 @@
                                     <td>
                                         @if ($item->status == 0)
                                         <span class="label label-primary">menunggu</span>
-                                        @elseif ($item->status == 0)
+                                        @elseif ($item->status == 1)
                                         <span class="label label-danger">sedang di periksa</span>
-                                        @else
+                                        @elseif ($item->status == 2)
                                         <span class="label label-succcess">selesai</span>
                                         @endif
-                                        {{$item->status}}
                                     </td>
                                 </tr>
                                 @endforeach
