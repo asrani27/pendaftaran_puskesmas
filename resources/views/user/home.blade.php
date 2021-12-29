@@ -47,7 +47,7 @@
                                         @elseif ($item->status == 1)
                                         <span class="label label-danger">sedang di periksa</span>
                                         @elseif ($item->status == 2)
-                                        <span class="label label-succcess">selesai</span>
+                                        <span class="label label-success">selesai</span>
                                         @endif
                                     </td>
                                 </tr>
