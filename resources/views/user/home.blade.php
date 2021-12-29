@@ -56,6 +56,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{$data->links()}}
                     <div class="text-center">
                         <a href="/user/home" class="btn btn-outline-primary btn-round btn-sm">Refresh</a>
                     </div>

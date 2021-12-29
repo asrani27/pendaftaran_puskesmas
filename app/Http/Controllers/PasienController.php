@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PasienController extends Controller
 {
@@ -77,6 +78,7 @@ class PasienController extends Controller
 
                 //Membuat nomor antrean
                 $antrean = DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', '=', $req->tanggal)->where('ruangan_id', $req->poli)->first();
+
                 if ($antrean == null) {
                     $nomor_antrean = 1;
                 } else {
@@ -122,14 +124,17 @@ class PasienController extends Controller
                 ]);
 
                 //Membuat nomor antrean
-                $antrean = DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', '=', $req->tanggal)->where('ruangan_id', $req->poli)->first();
+                // dd(DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', $req->tanggal)->where('ruangan_id', $req->poli)->latest()->first());
+                $antrean = DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', $req->tanggal)->where('ruangan_id', $req->poli)->latest()->first();
                 if ($antrean == null) {
                     $nomor_antrean = 1;
                 } else {
                     $query = "CAST(antrean AS DECIMAL(10,0)) DESC";
-                    $nomor_antrean = (int) DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', '=', $req->tanggal)->where('ruangan_id', $req->poli)->orderByRaw($query)->first()->antrean + 1;
+                    //orderByRaw($query)->
+                    $nomor_antrean = (int) DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', $req->tanggal)->where('ruangan_id', $req->poli)->latest()->first()->antrean + 1;
                 }
-
+                //dd(antrean($nomor_antrean));
+                //dd($antrean, $req->all(), $req->tanggal, DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', $req->tanggal)->latest()->first());
                 //Mendaftarkan pasien Ke Pelayanan
                 DB::connection($req->db)->table('t_pelayanan')->insert([
                     'tanggal'           => $req->tanggal . ' ' . Carbon::now()->format('H:i:s'),
