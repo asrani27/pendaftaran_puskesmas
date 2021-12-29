@@ -64,7 +64,6 @@ class PasienController extends Controller
 
                 $pasien = DB::connection($req->db)->table('m_pasien')->where('nik', $req->nik)->first();
 
-                dd($req->all(), $pasien);
                 //Mendaftarkan pasien Ke Poli
                 $pendaftaran_id = DB::connection($req->db)->table('t_pendaftaran')->insertGetId([
                     'tanggal'               => $req->tanggal . ' 00:00:00',
@@ -87,6 +86,7 @@ class PasienController extends Controller
                     $nomor_antrean = (int) DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', $req->tanggal)->where('ruangan_id', $req->poli)->latest()->first()->antrean + 1;
                 }
 
+                dd($req->all(), $pasien, $pendaftaran_id, $antrean);
                 //Mendaftarkan pasien Ke Pelayanan
                 DB::connection($req->db)->table('t_pelayanan')->insert([
                     'tanggal'           => $req->tanggal . ' 00:00:00',
