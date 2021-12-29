@@ -158,10 +158,10 @@ class PasienController extends Controller
             toastr()->success('Berhasil Disimpan');
             return redirect('/user/home');
         } catch (\Exception $e) {
-            DB::connection($req->db)->rollback();
             dd($e);
-            toastr()->error('error');
-            return redirect('/user/daftarpasien');
+            DB::connection($req->db)->rollback();
+            // toastr()->error('error');
+            // return redirect('/user/daftarpasien');
         }
     }
 }
