@@ -77,13 +77,13 @@ class PasienController extends Controller
                 ]);
 
                 //Membuat nomor antrean
-                $antrean = DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', '=', $req->tanggal)->where('ruangan_id', $req->poli)->first();
-
+                $antrean = DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', $req->tanggal)->where('ruangan_id', $req->poli)->latest()->first();
                 if ($antrean == null) {
                     $nomor_antrean = 1;
                 } else {
                     $query = "CAST(antrean AS DECIMAL(10,0)) DESC";
-                    $nomor_antrean = (int) DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', '=', $req->tanggal)->where('ruangan_id', $req->poli)->orderByRaw($query)->first()->antrean + 1;
+                    //orderByRaw($query)->
+                    $nomor_antrean = (int) DB::connection($req->db)->table('t_pelayanan')->whereDate('tanggal', $req->tanggal)->where('ruangan_id', $req->poli)->latest()->first()->antrean + 1;
                 }
 
                 //Mendaftarkan pasien Ke Pelayanan
