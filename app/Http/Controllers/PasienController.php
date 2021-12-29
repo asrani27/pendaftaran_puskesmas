@@ -159,7 +159,7 @@ class PasienController extends Controller
             return redirect('/user/home');
         } catch (\Exception $e) {
             DB::connection($req->db)->rollback();
-            dd($e)
+            dd($e);
             toastr()->error('error');
             return redirect('/user/daftarpasien');
         }
