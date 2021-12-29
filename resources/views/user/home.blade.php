@@ -49,6 +49,7 @@
                                         @else
                                         <span class="label label-succcess">selesai</span>
                                         @endif
+                                        {{$item->status}}
                                     </td>
                                 </tr>
                                 @endforeach
