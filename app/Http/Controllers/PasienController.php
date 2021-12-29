@@ -99,6 +99,7 @@ class PasienController extends Controller
                 $s->puskesmas = $req->db;
                 $s->pendaftaran_id = $pendaftaran_id;
                 $s->nama = $pasien->nama;
+                $s->user_id = Auth::user()->id;
                 $s->poli = DB::connection($req->db)->table('m_ruangan')->find($req->poli)->nama;
                 $s->save();
 
@@ -144,6 +145,7 @@ class PasienController extends Controller
                 $s->puskesmas = $req->db;
                 $s->pendaftaran_id = $pendaftaran_id;
                 $s->nama = $pasien->nama;
+                $s->user_id = Auth::user()->id;
                 $s->poli = DB::connection($req->db)->table('m_ruangan')->find($req->poli)->nama;
                 $s->save();
             }

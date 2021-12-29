@@ -33,30 +33,31 @@
                             <tbody>
                                 <tr>
                                     <th>Pasien</th>
-                                    <th>Puskesmas</th>
-                                    <th>Poli</th>
                                     <th>No Antrian</th>
                                     <th>Status</th>
                                 </tr>
+                                @foreach ($data as $item)
                                 <tr>
-                                    <td>Zainudin</td>
-                                    <td>Kayu Tangi</td>
-                                    <td>Umum</td>
-                                    <td>12</td>
-                                    <td><span class="label label-danger">menunggu</span></td>
+                                    <td>{{$item->nama}} <br />{{$item->puskesmas}}<br />Poli {{$item->poli}}</td>
+                                    <td>{{$item->antrean}}<br />{{\Carbon\Carbon::parse($item->tanggal)->format('d M
+                                        Y')}}</td>
+                                    <td>
+                                        @if ($item->status == 0)
+                                        <span class="label label-primary">menunggu</span>
+                                        @elseif ($item->status == 0)
+                                        <span class="label label-danger">sedang di periksa</span>
+                                        @else
+                                        <span class="label label-succcess">selesai</span>
+                                        @endif
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>Wawan</td>
-                                    <td>Terminal</td>
-                                    <td>Anak</td>
-                                    <td>12</td>
-                                    <td><span class="label label-primary">selesai</span></td>
-                                </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-outline-primary btn-round btn-sm">Refresh</button>
+                        <a href="/user/home" class="btn btn-outline-primary btn-round btn-sm">Refresh</a>
                     </div>
                 </div>
             </div>
