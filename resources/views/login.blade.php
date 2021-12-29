@@ -76,11 +76,11 @@
                                         <button type="submit"
                                             class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Login
                                         </button>
-                                        <a href="#"
+                                        {{-- <a href="#"
                                             class="btn btn-danger btn-xs btn-block waves-effect text-center m-b-20"><i
                                                 class="icofont icofont-social-google-plus"></i> Login
                                             Via Google
-                                        </a>
+                                        </a> --}}
                                     </div>
                                 </div>
                                 <hr />

@@ -27,7 +27,7 @@
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
                     <div class="signup-card card-block auth-body mr-auto ml-auto">
-                        <form class="md-float-material" method="POST" action="/register">
+                        <form id="registerAkun" class="md-float-material" method="POST" action="/register">
                             @csrf
                             <div class="text-center">
                                 <img src="/gradient/assets/images/logo.png" alt="logo.png">
@@ -86,7 +86,7 @@
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <button type="submit"
-                                            class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Register
+                                            class="btn btn-primary btnSubmit btn-md btn-block waves-effect text-center m-b-20">Register
                                         </button>
                                     </div>
                                 </div>
@@ -130,6 +130,14 @@
     <script type="text/javascript" src="/gradient/assets/js/common-pages.js"></script>
 
 
+    <script>
+        $(document).ready(function () {
+            $("#registerAkun").submit(function () {
+            $(".btnSubmit").attr("disabled", true);
+            return true;
+            });
+        });
+    </script>
     @toastr_js
     @toastr_render
 </body>
