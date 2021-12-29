@@ -64,6 +64,7 @@ class PasienController extends Controller
 
                 $pasien = DB::connection($req->db)->table('m_pasien')->where('nik', $req->nik)->first();
 
+                dd($req->all(), $pasien);
                 //Mendaftarkan pasien Ke Poli
                 $pendaftaran_id = DB::connection($req->db)->table('t_pendaftaran')->insertGetId([
                     'tanggal'               => $req->tanggal . ' 00:00:00',
