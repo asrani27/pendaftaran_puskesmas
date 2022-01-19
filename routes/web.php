@@ -55,3 +55,5 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])
     ->middleware(['auth', 'signed'])
     ->name('verification.verify');
+
+require __DIR__.'/web-sso.php';
