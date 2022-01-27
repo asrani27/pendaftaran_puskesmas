@@ -24,6 +24,12 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="https://sso.banjarmasinkota.go.id/vendor/bjm-sso/bjm-sso.css">
+  <script src="https://sso.banjarmasinkota.go.id/vendor/bjm-sso/bjm-sso.js"></script>
+  {{-- <link rel="stylesheet"type="text/css" href="http://server.banjarmasinkota.go.id:8000/vendor/bjm-sso/bjm-sso.css">
+	<script src="http://server.banjarmasinkota.go.id:8000/vendor/bjm-sso/bjm-sso.js"></script> --}}
+
 </head>
 
 <body>
@@ -231,6 +237,78 @@
 
   <!-- jQuery first, then Tether, then Bootstrap JS. -->
   <script src="/baapik/js/jquery-min.js"></script>
+
+  <!-- The user is authenticated... -->
+    
+  <script>
+    @if(Auth::check())
+    $(function() { 
+      console.log('sudah login');
+        window.location.replace("{{ url('/user/home') }}");
+    });
+    @else
+    
+    console.log('belum login');
+    function clickLogin() {
+        var sso = new BjmSSO();
+        sso.loginWindow(function(result) {
+            console.log(result);
+            if (result['status']) {
+                sendToServer(result);
+            }
+        });
+    }
+
+    function sendToServer(result) {
+        var user = result['data']['user']; 
+        var token = result['data']['key'];
+        var formData = new FormData();
+        for ( var key in user ) {
+            formData.append(key, user[key]);
+        }
+        formData.append('id_sso', user['id']);
+        formData.append('token', token);
+        formData.append('_token', '{{ csrf_token() }}');
+        $.ajax({
+            type: "POST",
+            url: "{{ route('sso.register') }}",
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            success: function(data, textStatus, jqXHR) {
+                // $(".is-invalid").removeClass("is-invalid");
+                if (data['status'] == true) {
+                    window.location.replace("{{ url('/user/home') }}");
+                    //location.reload();
+                }
+                else {
+                    console.log(data['message']);
+                    toastr.error(data['message']);
+                    $("div").removeClass("loadingsso");
+                }  
+            },
+            error: function(data, textStatus, jqXHR) {
+                console.log(data);
+                console.log('Login Gagal!');
+            },
+        });
+    }
+
+    $(function() { 
+        @if (request('is_sso'))
+        var sso = new BjmSSO();
+        sso.login(function(result) {
+            console.log(result);
+            if (result['status']) {
+                sendToServer(result);
+            }
+        });
+        @endif
+    });
+    @endif
+  </script>
+
   <script src="/baapik/js/popper.min.js"></script>
   <script src="/baapik/js/bootstrap.min.js"></script>
   <script src="/baapik/js/owl.carousel.js"></script>
@@ -240,7 +318,6 @@
   <script src="/baapik/js/nivo-lightbox.js"></script>
   <script src="/baapik/js/jquery.magnific-popup.min.js"></script>
   <script src="/baapik/js/main.js"></script>
-
 </body>
 
 </html>
