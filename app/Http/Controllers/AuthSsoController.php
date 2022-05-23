@@ -15,12 +15,12 @@ class AuthSsoController extends Controller
     var $password = 'qwerty';
 
     // var $base_url = 'http://sso.banjarmasinkota.go.id:8000';
-    var $base_url = 'https://sso.banjarmasinkota.go.id';
-    
+    var $base_url = 'https://bapintar.banjarmasinkota.go.id';
+
     // var $base_url = 'http://server.banjarmasinkota.go.id:8000';
-    
+
     public function register(Request $req)
-    { 
+    {
         $req->validate([
             'name'   => 'required|string|max:255',
             'email'  => 'required|string|email|max:255',
@@ -31,15 +31,13 @@ class AuthSsoController extends Controller
         // cek apakah id sso sudah sudah login / valid
         $isValid = $this->_isValid($req->id_sso, $req->token);
 
-        if ($isValid)
-        {
+        if ($isValid) {
             // cek apakah id sso sudah terdaftar
             $user = User::where('id_sso', $req->id_sso)->first();
             if ($user == null) {
-                $roleUser = Role::where('name','user')->first();
+                $roleUser = Role::where('name', 'user')->first();
                 $user = User::where('email', $req->email)->first();
-                if ($user == null) 
-                {
+                if ($user == null) {
                     $user = new User;
                     $user->name = $req->name;
                     $user->username = $req->email;
@@ -47,9 +45,8 @@ class AuthSsoController extends Controller
                     $user->password = bcrypt($this->password);
                     $user->id_sso = $req->id_sso;
                     $user->save();
-                    $user->roles()->attach($roleUser); 
-                }
-                else {        
+                    $user->roles()->attach($roleUser);
+                } else {
                     // auto sync
                     $user->id_sso = $req->id_sso;
                     $user->save();
@@ -59,14 +56,12 @@ class AuthSsoController extends Controller
             }
 
             // login
-            if ($user) 
-            {
+            if ($user) {
                 Auth::login($user);
-                if (Auth::check())
-                {
+                if (Auth::check()) {
                     return response()->json([
                         'status'  => true,
-                        'message' => 'Login Berhasil...', 
+                        'message' => 'Login Berhasil...',
                     ]);
                 }
             }
@@ -74,12 +69,12 @@ class AuthSsoController extends Controller
 
         return response()->json([
             'status'  => false,
-            'message' => 'Login Gagal...x', 
+            'message' => 'Login Gagal...x',
         ]);
     }
 
     public function sync(Request $req)
-    { 
+    {
         $req->validate([
             'name'   => 'required|string|max:255',
             'email'  => 'required|string|email|max:255',
@@ -90,33 +85,30 @@ class AuthSsoController extends Controller
         // cek apakah id sso sudah sudah login / valid
         $isValid = $this->_isValid($req->id_sso, $req->token);
 
-        if ($isValid)
-        {
+        if ($isValid) {
             // cek apakah id sso sudah terdaftar
             $user = User::where('id_sso', $req->id_sso)->first();
             if ($user == null) {
                 $user = User::find($req->id_app);
                 $user->id_sso = $req->id_sso;
-                $user->save(); 
+                $user->save();
                 $this->_registerApp($req->id_sso);
 
                 return response()->json([
                     'status'  => true,
-                    'message' => 'Sync Berhasil...', 
+                    'message' => 'Sync Berhasil...',
                 ]);
-            }
-            else 
-            {
+            } else {
                 return response()->json([
                     'status'  => false,
-                    'message' => 'Gagal, SSO anda sudah terdaftar...', 
+                    'message' => 'Gagal, SSO anda sudah terdaftar...',
                 ]);
             }
         }
 
         return response()->json([
             'status'  => false,
-            'message' => 'Gagal ...', 
+            'message' => 'Gagal ...',
         ]);
     }
 
@@ -128,12 +120,12 @@ class AuthSsoController extends Controller
         ]);
     }
 
-    protected function _isValid($id_sso, $token) 
+    protected function _isValid($id_sso, $token)
     {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->base_url.'/api/sso/is-valid',
+            CURLOPT_URL => $this->base_url . '/api/sso/is-valid',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -143,7 +135,7 @@ class AuthSsoController extends Controller
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array('id_sso' => $id_sso),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer '.$token,
+                'Authorization: Bearer ' . $token,
             ),
         ));
 
@@ -159,12 +151,12 @@ class AuthSsoController extends Controller
         return false;
     }
 
-    protected function _registerApp($id_sso) 
+    protected function _registerApp($id_sso)
     {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->base_url.'/api/sso/register-app',
+            CURLOPT_URL => $this->base_url . '/api/sso/register-app',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,

@@ -14,13 +14,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/login', function(){
-//     if(Auth::check()){
-//         return redirect('/');
-//     }
-//     return view('login');
-// })->name('login');
-
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('/login_l', [LoginController::class, 'index_l']);
 Route::get('/logout', [LoginController::class, 'logout']);
@@ -30,7 +23,6 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 Route::get('/verify', [RegisterController::class, 'verify']);
-
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::prefix('user')->group(function () {
@@ -56,4 +48,4 @@ Route::get('/verify-email/{id}/{hash}', [EmailVerificationController::class, 've
     ->middleware(['auth', 'signed'])
     ->name('verification.verify');
 
-require __DIR__.'/web-sso.php';
+require __DIR__ . '/web-sso.php';
