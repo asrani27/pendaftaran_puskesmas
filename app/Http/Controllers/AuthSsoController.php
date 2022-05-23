@@ -92,6 +92,7 @@ class AuthSsoController extends Controller
             $user = User::where('id_sso', $req->id_sso)->first();
             if ($user == null) {
                 $user = User::find($req->id_app);
+                $user->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
                 $user->id_sso = $req->id_sso;
                 $user->save();
                 $this->_registerApp($req->id_sso);
