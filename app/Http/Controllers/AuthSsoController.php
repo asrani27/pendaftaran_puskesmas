@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Auth;
 // use Illuminate\Foundation\Auth\RegistersUsers;
+use Carbon\Carbon;
 use App\Models\Role;
 use App\Models\User;
-use Auth;
+use Illuminate\Http\Request;
 
 class AuthSsoController extends Controller
 {
