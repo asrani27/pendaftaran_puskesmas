@@ -44,11 +44,13 @@ class AuthSsoController extends Controller
                     $user->email = $req->email;
                     $user->password = bcrypt($this->password);
                     $user->id_sso = $req->id_sso;
+                    $user->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
                     $user->save();
                     $user->roles()->attach($roleUser);
                 } else {
                     // auto sync
                     $user->id_sso = $req->id_sso;
+                    $user->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
                     $user->save();
                 }
 
