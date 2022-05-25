@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Gradient Able bootstrap admin template by codedthemes </title>
+    <title>Baapik</title>
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -51,7 +51,7 @@
                         <form class="md-float-material" method="POST" action="/login">
                             @csrf
                             <div class="text-center">
-                                <img src="/gradient/assets/images/logo.png" alt="logo.png">
+                                <img src="/baapik/baapik1.png" alt="logo.png">
                             </div>
                             <div class="auth-box">
                                 <div class="row m-b-20">

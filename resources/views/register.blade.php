@@ -30,7 +30,7 @@
                         <form id="registerAkun" class="md-float-material" method="POST" action="/register">
                             @csrf
                             <div class="text-center">
-                                <img src="/gradient/assets/images/logo.png" alt="logo.png">
+                                <img src="/baapik/baapik1.png" alt="logo.png">
                             </div>
                             <div class="auth-box">
                                 <div class="row m-b-20">

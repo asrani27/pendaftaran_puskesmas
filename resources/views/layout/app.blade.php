@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <a href="#">
-                            <img class="img-fluid" src="/gradient/assets/images/logo.png" alt="Theme-Logo" />
+                            <img class="img-fluid" src="/baapik/baapik1.png" alt="Theme-Logo" />
                         </a>
                         <a class="mobile-options">
                             <i class="ti-more"></i>
