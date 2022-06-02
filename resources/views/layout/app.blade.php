@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="/gradient/assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="/gradient/assets/css/style.css">
+
     <link rel="stylesheet" type="text/css" href="/gradient/assets/css/jquery.mCustomScrollbar.css">
     @toastr_css
     @stack('css')
