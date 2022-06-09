@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
 
         $data = Pendaftaran::where('user_id', Auth::user()->id)->paginate(10);
-        dd($data);
+
         $data->getCollection()->transform(function ($item) {
 
             $d =  DB::connection($item->puskesmas)->table('t_pelayanan')->where('pendaftaran_id', $item->pendaftaran_id)->first();
