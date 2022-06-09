@@ -35,6 +35,7 @@
                                     <th>Pasien</th>
                                     <th>No Antrian</th>
                                     <th>Status</th>
+                                    <th>Sisa Antrian</th>
                                 </tr>
                                 @foreach ($data as $item)
                                 <tr>
@@ -50,6 +51,7 @@
                                         <span class="label label-success">selesai</span>
                                         @endif
                                     </td>
+                                    <td>0</td>
                                 </tr>
                                 @endforeach
 
