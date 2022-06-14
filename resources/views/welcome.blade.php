@@ -106,47 +106,6 @@
       <!-- End Row -->
       <!-- Start Row -->
       <div class="row">
-        <!-- Start Col -->
-        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-          <!-- Blog Item Starts -->
-          <div class="blog-item-wrapper">
-            <div class="blog-item-text">
-              <h3><a href="#"><i class="fas fa-hospital"></i> Karang Mekar</a></h3>
-              <p><i class="fas fa-map-marker-alt"></i> Jl Pramuka Km 6 Gg Teratai RT 33 RW 1 No 36 Kodepos 70353</p>
-              <p><i class="fas fa-phone"></i> 0877 2345 2343</p>
-              <p><i class="fas fa-clock"></i> 08:00 - 17:00</p>
-            </div>
-          </div>
-          <!-- Blog Item Wrapper Ends-->
-        </div>
-        <!-- End Col -->
-        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-          <!-- Blog Item Starts -->
-          <div class="blog-item-wrapper">
-            <div class="blog-item-text">
-              <h3><a href="#"><i class="fas fa-hospital"></i> Kayu Tangi</a></h3>
-              <p><i class="fas fa-map-marker-alt"></i> Jl Pramuka Km 6 Gg Teratai RT 33 RW 1 No 36 Kodepos 70353</p>
-              <p><i class="fas fa-phone"></i> 0877 2345 2343</p>
-              <p><i class="fas fa-clock"></i> 08:00 - 17:00</p>
-            </div>
-          </div>
-          <!-- Blog Item Wrapper Ends-->
-        </div>
-
-        <!-- Start Col -->
-        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-          <!-- Blog Item Starts -->
-          <div class="blog-item-wrapper">
-            <div class="blog-item-text">
-              <h3><a href="#"><i class="fas fa-hospital"></i> Sei Jingah</a></h3>
-              <p><i class="fas fa-map-marker-alt"></i> Jl Pramuka Km 6 Gg Teratai RT 33 RW 1 No 36 Kodepos 70353</p>
-              <p><i class="fas fa-phone"></i> 0877 2345 2343</p>
-              <p><i class="fas fa-clock"></i> 08:00 - 17:00</p>
-            </div>
-          </div>
-          <!-- Blog Item Wrapper Ends-->
-        </div>
-        <!-- End Col -->
 
         <!-- Start Col -->
         <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
@@ -154,39 +113,9 @@
           <div class="blog-item-wrapper">
             <div class="blog-item-text">
               <h3><a href="#"><i class="fas fa-hospital"></i> Banjarmasin Indah</a></h3>
-              <p><i class="fas fa-map-marker-alt"></i> Jl Pramuka Km 6 Gg Teratai RT 33 RW 1 No 36 Kodepos 70353</p>
-              <p><i class="fas fa-phone"></i> 0877 2345 2343</p>
-              <p><i class="fas fa-clock"></i> 08:00 - 17:00</p>
-            </div>
-          </div>
-          <!-- Blog Item Wrapper Ends-->
-        </div>
-        <!-- End Col -->
-
-        <!-- Start Col -->
-        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-          <!-- Blog Item Starts -->
-          <div class="blog-item-wrapper">
-            <div class="blog-item-text">
-              <h3><a href="#"><i class="fas fa-hospital"></i> Sei Mesa</a></h3>
-              <p><i class="fas fa-map-marker-alt"></i> Jl Pramuka Km 6 Gg Teratai RT 33 RW 1 No 36 Kodepos 70353</p>
-              <p><i class="fas fa-phone"></i> 0877 2345 2343</p>
-              <p><i class="fas fa-clock"></i> 08:00 - 17:00</p>
-            </div>
-          </div>
-          <!-- Blog Item Wrapper Ends-->
-        </div>
-        <!-- End Col -->
-
-        <!-- Start Col -->
-        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-          <!-- Blog Item Starts -->
-          <div class="blog-item-wrapper">
-            <div class="blog-item-text">
-              <h3><a href="#"><i class="fas fa-hospital"></i> Terminal Pal 6</a></h3>
-              <p><i class="fas fa-map-marker-alt"></i> Jl Pramuka Km 6 Gg Teratai RT 33 RW 1 No 36 Kodepos 70353</p>
-              <p><i class="fas fa-phone"></i> 0877 2345 2343</p>
-              <p><i class="fas fa-clock"></i> 08:00 - 17:00</p>
+              <p><i class="fas fa-map-marker-alt"></i> Jl ....</p>
+              <p><i class="fas fa-phone"></i> Telp</p>
+              <p><i class="fas fa-clock"></i> 08:00 - 12:00</p>
             </div>
           </div>
           <!-- Blog Item Wrapper Ends-->
