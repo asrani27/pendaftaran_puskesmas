@@ -95,7 +95,7 @@
         <div class="col-lg-12">
           <div class="blog-text section-header text-center">
             <div>
-              <h2 class="section-title">Daftar Puskesmas Di Banjarmasin</h2>
+              <h2 class="section-title">Daftar Puskesmas Yang Online</h2>
               <div class="desc-text">
               </div>
             </div>

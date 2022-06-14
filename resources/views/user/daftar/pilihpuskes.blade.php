@@ -22,7 +22,8 @@
                                     <option value="">-puskes-</option>
                                     <option value="banjarmasinindah" {{old('puskesmas')=='banjarmasinindah' ? 'selected'
                                         :''}}>Banjarmasin Indah</option>
-                                    <option value="karangmekar" {{old('puskesmas')=='karangmekar' ? 'selected' :''}}>
+                                    {{-- <option value="karangmekar" {{old('puskesmas')=='karangmekar' ? 'selected'
+                                        :''}}>
                                         Karang Mekar</option>
                                     <option value="kayutangi" {{old('puskesmas')=='kayutangi' ? 'selected' :''}}>Kayu
                                         Tangi</option>
@@ -31,7 +32,7 @@
                                     <option value="seimesa" {{old('puskesmas')=='seimesa' ? 'selected' :''}}>Sei Mesa
                                     </option>
                                     <option value="terminal" {{old('puskesmas')=='terminal' ? 'selected' :''}}>Terminal
-                                    </option>
+                                    </option> --}}
                                 </select>
                             </div>
                         </div>
