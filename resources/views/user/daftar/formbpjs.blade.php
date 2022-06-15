@@ -53,7 +53,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Jenis Kelamin</label>
                             <div class="col-sm-10">
-                                <select name="jenis_kelamin" class="form-control">
+                                <select name="jenis_kelamin" class="form-control" readonly>
                                     <option value="">-gender-</option>
                                     <option value="L" {{$data==null ? '' :$data->sex =='L' ? 'selected' :''}}>
                                         Laki-Laki</option>
@@ -66,7 +66,8 @@
                             <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                             <div class="col-sm-10">
                                 <input type="date" class="form-control" name="tanggal_lahir"
-                                    value="{{$data == null ? '':\Carbon\Carbon::createFromFormat('d-m-Y',$data->tglLahir)->format('Y-m-d')}}">
+                                    value="{{$data == null ? '':\Carbon\Carbon::createFromFormat('d-m-Y',$data->tglLahir)->format('Y-m-d')}}"
+                                    readonly>
                             </div>
                         </div>
                         <div class="form-group row">
