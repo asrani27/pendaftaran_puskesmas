@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="card">
-                <form method="get" action="/user/daftarpasien/puskesmas/{{$puskes->kode}}/bpjs/check">
+                <form method="post" action="/user/daftarpasien/puskesmas/{{$puskes->kode}}/bpjs/check">
                     @csrf
                     <div class="card-block text-center">
                         <i class="fa fa-user text-c-blue d-block f-40"></i>
