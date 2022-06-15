@@ -170,7 +170,7 @@ class PasienController extends Controller
 
                 $puskes = M_puskesmas::where('kode', $req->kode)->first();
                 if ($data->kdProviderPst->kdProvider != $req->kode) {
-                    toastr()->error('TIDAK BISA MENDAFTAR DI FASKES ', .$puskes->nama.', ANDA TERDAFTAR DI FASKES '.$data->kdProviderPst->nmProvider);
+                    toastr()->error('TIDAK BISA MENDAFTAR DI FASKES ' . $puskes->nama . ', ANDA TERDAFTAR DI FASKES ' . $data->kdProviderPst->nmProvider);
                     $req->flash();
                     return back();
                 }
