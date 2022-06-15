@@ -46,9 +46,13 @@
                                         @if ($item->status == 0)
                                         <span class="label label-primary">menunggu</span>
                                         @elseif ($item->status == 1)
-                                        <span class="label label-danger">sedang di periksa</span>
+                                        <span class="label label-danger">Anda Di Panggil</span>
                                         @elseif ($item->status == 2)
+                                        <span class="label label-danger">Sedang Di Periksa</span>
+                                        @elseif ($item->status == 3)
                                         <span class="label label-success">selesai</span>
+                                        @elseif ($item->status == 4)
+                                        <span class="label label-success">di lewati</span>
                                         @endif
                                     </td>
                                     <td>0</td>
