@@ -16,11 +16,16 @@ class HomeController extends Controller
 
         $data->getCollection()->transform(function ($item) {
             $d =  DB::connection($item->puskesmas)->table('t_antrian')->where('pendaftaran_id', $item->id)->first();
+            $s =  DB::connection($item->puskesmas)->table('t_antrian')->where('kdPoli', $item->kdPoli)->where('pendaftaran_id', '<', $item->id)->count();
+
             $item->antrian = $d->nomor_antrian;
+            $item->sisa_antrian = $s;
             $item->status = $d->status;
             return $item;
         });
 
+        $sorted = $data->getCollection()->sortBy('created_at')->sortBy('status')->values();
+        $data->setCollection($sorted);
 
         return view('user.home', compact('data'));
     }

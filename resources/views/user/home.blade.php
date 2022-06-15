@@ -55,7 +55,9 @@
                                         <span class="label label-success">di lewati</span>
                                         @endif
                                     </td>
-                                    <td>0</td>
+                                    <td>
+                                        {{$item->sisa_antrian}}
+                                    </td>
                                 </tr>
                                 @endforeach
 
