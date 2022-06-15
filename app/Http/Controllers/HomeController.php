@@ -16,6 +16,7 @@ class HomeController extends Controller
 
         $data->getCollection()->transform(function ($item) {
             $d =  DB::connection($item->puskesmas)->table('t_antrian')->where('pendaftaran_id', $item->id)->first();
+            dd($d);
             $item->antrian = $d->nomor_antrian;
             $item->status = $d->status;
             return $item;
