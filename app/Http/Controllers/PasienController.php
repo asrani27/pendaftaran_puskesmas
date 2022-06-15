@@ -170,8 +170,9 @@ class PasienController extends Controller
                 }
 
                 $puskes = M_puskesmas::where('kode', $req->kode)->first();
+                $poli = M_poli::where('poliSakit', 1)->get();
 
-                return view('user.daftar.formbpjs', compact('data', 'puskes'));
+                return view('user.daftar.formbpjs', compact('data', 'puskes', 'poli'));
             } catch (\Exception $e) {
                 toastr()->error('GAGAL CHECK DATA, BRIDGING SEDANG GANGGUAN');
                 $req->flash();
