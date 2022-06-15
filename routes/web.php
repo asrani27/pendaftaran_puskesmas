@@ -29,6 +29,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('home', [HomeController::class, 'user']);
         Route::get('pendaftaran', [PendaftaranController::class, 'index']);
         Route::get('daftarpasien', [PasienController::class, 'daftar']);
+        Route::get('daftarpasien/puskesmas/{namapuskes}', [PasienController::class, 'puskesmas']);
+        Route::get('daftarpasien/puskesmas/{namapuskes}/bpjs', [PasienController::class, 'bpjs']);
+        Route::get('daftarpasien/puskesmas/{namapuskes}/umum', [PasienController::class, 'umum']);
+        Route::post('simpan-daftar', [PasienController::class, 'simpanPendaftaran']);
         Route::get('checkpasien', function () {
             return redirect('/user/daftarpasien');
         });

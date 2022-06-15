@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\M_poli;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,76 @@ class PasienController extends Controller
         return view('user.daftar.pilihpuskes', compact('found'));
     }
 
+    public function puskesmas($namapuskes)
+    {
+        $puskesmas = $namapuskes;
+        return view('user.daftar.pilihasuransi', compact('puskesmas'));
+    }
+
+    public function bpjs($namapuskes)
+    {
+        $found = 0;
+        return view('user.daftar.formbpjs', compact('found'));
+    }
+
+    public function umum($namapuskes)
+    {
+        $poli = M_poli::where('poliSakit', 1)->get();
+        return view('user.daftar.formumum', compact('poli', 'namapuskes'));
+    }
+
+    public function simpanPendaftaran(Request $req)
+    {
+        //dd($req->all());
+
+        $p = new Pendaftaran;
+        $p->puskesmas = $req->puskesmas;
+        $p->jenis = $req->jenis;
+        $p->nik = $req->nik;
+        $p->nama = $req->nama;
+        $p->jkel = $req->jenis_kelamin;
+        $p->tgl_lahir = $req->tanggal_lahir;
+        $p->tgl_daftar = $req->tanggal;
+        $p->user_id = Auth::user()->id;
+        $p->kdPoli = M_poli::where('kdPoli', $req->kdPoli)->first()->kdPoli;
+        $p->nmPoli = M_poli::where('kdPoli', $req->kdPoli)->first()->nmPoli;
+        $p->save();
+
+        $db = DB::connection($req->puskesmas)->table('t_antrian')->where('tanggal', $req->tanggal)->where('kdPoli', $req->kdPoli)->get();
+        if ($db->count() == 0) {
+            $antrian = antrean(1);
+            DB::connection($req->puskesmas)->table('t_antrian')->insert([
+                'tanggal'       => $req->tanggal,
+                'nama'          => $req->nama,
+                'nik'           => $req->nik,
+                'jenis_kelamin' => $req->jenis_kelamin,
+                'tanggal_lahir' => $req->tanggal_lahir,
+                'jenis'         => 'UMUM',
+                'kdPoli'        => M_poli::where('kdPoli', $req->kdPoli)->first()->kdPoli,
+                'nmPoli'        => M_poli::where('kdPoli', $req->kdPoli)->first()->nmPoli,
+                'nomor_antrian' => $antrian,
+                'pendaftaran_id' => $p->id,
+            ]);
+        } else {
+
+            $antrian = antrean((int)$db->last()->nomor_antrian + 1);
+            DB::connection($req->puskesmas)->table('t_antrian')->insert([
+                'tanggal'       => $req->tanggal,
+                'nama'          => $req->nama,
+                'nik'           => $req->nik,
+                'jenis_kelamin' => $req->jenis_kelamin,
+                'tanggal_lahir' => $req->tanggal_lahir,
+                'jenis'         => 'UMUM',
+                'kdPoli'        => M_poli::where('kdPoli', $req->kdPoli)->first()->kdPoli,
+                'nmPoli'        => M_poli::where('kdPoli', $req->kdPoli)->first()->nmPoli,
+                'nomor_antrian' => $antrian,
+                'pendaftaran_id' => $p->id,
+            ]);
+        }
+        //dd($db, $req->all());
+        toastr()->success('Pendaftaran Berhasil');
+        return redirect('/user/home');
+    }
     public function checkPasien(Request $req)
     {
         $check = DB::connection($req->puskesmas)->table('m_pasien')->where('nik', $req->nik)->first();

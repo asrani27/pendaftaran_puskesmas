@@ -32,15 +32,15 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <th>Pasien</th>
-                                    <th>No Antrian</th>
+                                    <th>Pasien/Puskes/Poli</th>
+                                    <th>No antrian/Tanggal</th>
                                     <th>Status</th>
                                     <th>Sisa Antrian</th>
                                 </tr>
                                 @foreach ($data as $item)
                                 <tr>
-                                    <td>{{$item->nama}} <br />{{$item->puskesmas}}<br />Poli {{$item->poli}}</td>
-                                    <td>{{$item->antrean}}<br />{{\Carbon\Carbon::parse($item->tanggal)->format('d M
+                                    <td>{{$item->nama}} <br />{{$item->puskesmas}}<br />{{$item->nmPoli}}</td>
+                                    <td>{{$item->antrian}}<br />{{\Carbon\Carbon::parse($item->tgl_daftar)->format('d M
                                         Y')}}</td>
                                     <td>
                                         @if ($item->status == 0)

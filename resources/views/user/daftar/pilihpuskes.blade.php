@@ -13,17 +13,20 @@
                     @csrf
                     <div class="card-block text-center">
                         <i class="fa fa-hospital text-c-blue d-block f-40"></i>
-                        <h4 class="m-t-20"> Pilih Puskemas Dan Masukkan NIK
+                        <h4 class="m-t-20"> Pilih Puskemas
                         </h4>
-                        <div class="form-group row">
+                        <a href="/user/daftarpasien/puskesmas/banjarmasinindah"
+                            class="btn btn-primary btn-block btn-md btn-round">BANJARMASIN
+                            INDAH</a>
+                        {{-- <div class="form-group row">
+
                             <label class="col-sm-2 col-form-label">Puskesmas</label>
                             <div class="col-sm-10">
                                 <select name="puskesmas" class="form-control" required>
                                     <option value="">-puskes-</option>
                                     <option value="banjarmasinindah" {{old('puskesmas')=='banjarmasinindah' ? 'selected'
                                         :''}}>Banjarmasin Indah</option>
-                                    {{-- <option value="karangmekar" {{old('puskesmas')=='karangmekar' ? 'selected'
-                                        :''}}>
+                                    <option value="karangmekar" {{old('puskesmas')=='karangmekar' ? 'selected' :''}}>
                                         Karang Mekar</option>
                                     <option value="kayutangi" {{old('puskesmas')=='kayutangi' ? 'selected' :''}}>Kayu
                                         Tangi</option>
@@ -32,7 +35,7 @@
                                     <option value="seimesa" {{old('puskesmas')=='seimesa' ? 'selected' :''}}>Sei Mesa
                                     </option>
                                     <option value="terminal" {{old('puskesmas')=='terminal' ? 'selected' :''}}>Terminal
-                                    </option> --}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -47,7 +50,7 @@
                             <div class="col-sm-10">
                                 <button type="submit" class="btn btn-primary btn-block">Check</button>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </form>
             </div>
