@@ -137,7 +137,7 @@ class PasienController extends Controller
                     'base_uri' => 'https://new-api.bpjs-kesehatan.go.id/pcare-rest-v3.0/',
                 ]);
 
-                $response = $client->request('GET', 'dokter/0/3', [
+                $response = $client->request('GET', 'peserta/' . $req->noKartu, [
                     'headers' => $head,
                 ]);
 
