@@ -127,6 +127,7 @@ class PasienController extends Controller
                 return back();
             }
 
+
             $namaDB = M_puskesmas::where('kode', $req->kode)->first();
 
             $user = DB::connection($namaDB->db)->table('users')->first();
@@ -168,9 +169,9 @@ class PasienController extends Controller
                     return back();
                 }
 
-                $puskesmas = $req->puskesmas;
-                
-                return view('user.daftar.formbpjs', compact('data', 'puskesmas'));
+                $puskes = M_puskesmas::where('kode', $req->kode)->first();
+
+                return view('user.daftar.formbpjs', compact('data', 'puskes'));
             } catch (\Exception $e) {
                 toastr()->error('GAGAL CHECK DATA, BRIDGING SEDANG GANGGUAN');
                 $req->flash();
