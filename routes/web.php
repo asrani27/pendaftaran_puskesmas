@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('daftarpasien/puskesmas/{namapuskes}', [PasienController::class, 'puskesmas']);
         Route::get('daftarpasien/puskesmas/{namapuskes}/bpjs', [PasienController::class, 'bpjs']);
         Route::get('daftarpasien/puskesmas/{namapuskes}/umum', [PasienController::class, 'umum']);
+        Route::get('daftarpasien/puskesmas/{namapuskes}/bpjs/check', [PasienController::class, 'checkKartu']);
         Route::post('simpan-daftar', [PasienController::class, 'simpanPendaftaran']);
         Route::post('simpan-bpjs', [PasienController::class, 'simpanPendaftaranBpjs']);
         Route::get('checkpasien', function () {

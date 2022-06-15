@@ -111,8 +111,82 @@ class PasienController extends Controller
         }
     }
 
+    public function checkKartu()
+    {
+
+        if (request()->noKartu == null) {
+            toastr()->error('NO KARTU KOSONG');
+            request()->flash();
+            return back();
+        }
+
+        if (strlen(request()->noKartu) != 13) {
+            toastr()->error('JUMLAH NO BPJS HARUS 13');
+            request()->flash();
+            return back();
+        }
+
+        $namaDB = M_puskesmas::where('kode', request()->kode)->first();
+
+        $user = DB::connection($namaDB->db)->table('users')->first();
+
+        $cons_id = $user->cons_id;
+        $secret_key = $user->secret_key;
+        $username_pcare = $user->user_pcare;
+        $password_pcare = $user->pass_pcare;
+        $kdAplikasi = '095';
+
+        date_default_timezone_set('UTC');
+        $tStamp = strval(time() - strtotime('1970-01-01 00:00:00'));
+        $signature = hash_hmac('sha256', $cons_id . "&" . $tStamp, $secret_key, true);
+        $encodedSignature = base64_encode($signature);
+        $urlencodedSignature = urlencode($encodedSignature);
+
+        $Authorization = base64_encode($username_pcare . ':' . $password_pcare . ':' . $kdAplikasi);
+
+        $head['X-cons-id'] = $cons_id;
+        $head['X-Timestamp'] = $tStamp;
+        $head['X-Signature'] = $encodedSignature;
+        $head['X-Authorization'] = 'Basic ' . $Authorization;
+
+        try {
+
+            $client = new Client([
+                'base_uri' => 'https://new-api.bpjs-kesehatan.go.id/pcare-rest-v3.0/',
+            ]);
+
+            $response = $client->request('GET', 'peserta/' . request()->noKartu, [
+                'headers' => $head,
+            ]);
+
+            $data = json_decode((string)$response->getBody())->response;
+
+            if ($data == null) {
+                toastr()->error('NO BPJS TIDAK DITEMUKAN');
+                request()->flash();
+                return back();
+            }
+
+            $puskes = M_puskesmas::where('kode', request()->kode)->first();
+            if ($data->kdProviderPst->kdProvider != request()->kode) {
+                toastr()->error('TIDAK BISA MENDAFTAR DI FASKES ' . $puskes->nama . ', ANDA TERDAFTAR DI FASKES ' . $data->kdProviderPst->nmProvider);
+                request()->flash();
+                return back();
+            }
+            $poli = M_poli::where('poliSakit', 1)->get();
+
+            request()->flash();
+            return view('user.daftar.formbpjsditemukan', compact('data', 'puskes', 'poli'));
+        } catch (\Exception $e) {
+            toastr()->error('GAGAL CHECK DATA, BRIDGING SEDANG GANGGUAN');
+            request()->flash();
+            return back();
+        }
+    }
+
     public function simpanPendaftaranBpjs(Request $req)
     {
+        dd(request()->all());
         if ($req->button == 'check') {
             //check ke pcare
             if ($req->noKartu == null) {
