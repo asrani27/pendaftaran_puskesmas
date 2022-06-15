@@ -189,6 +189,7 @@ class PasienController extends Controller
     {
         DB::beginTransaction();
         try {
+            dd($req->all());
             $namaDB = M_puskesmas::where('kode', $req->kode)->first();
             $p = new Pendaftaran;
             $p->puskesmas = $namaDB->db;
