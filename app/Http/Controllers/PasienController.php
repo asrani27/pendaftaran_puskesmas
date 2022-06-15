@@ -150,6 +150,7 @@ class PasienController extends Controller
                 }
 
                 $puskesmas = $req->puskesmas;
+                dd($data);
                 return view('user.daftar.formbpjs', compact('data', 'puskesmas'));
             } catch (\Exception $e) {
                 toastr()->error('GAGAL CHECK DATA, BRIDGING SEDANG GANGGUAN');
