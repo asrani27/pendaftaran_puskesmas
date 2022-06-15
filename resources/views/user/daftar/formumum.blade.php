@@ -18,7 +18,9 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">PUSKESMAS</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="puskesmas" value="{{$namapuskes}}"
+                                <input type="text" class="form-control" name="puskesmas" value="{{$puskes->nama}}"
+                                    readonly>
+                                <input type="hidden" class="form-control" name="kode" value="{{$puskes->kode}}"
                                     readonly>
                             </div>
                         </div>

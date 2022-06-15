@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\M_poli;
 use GuzzleHttp\Client;
+use App\Models\M_puskesmas;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,14 +15,21 @@ class PasienController extends Controller
 {
     public function daftar()
     {
-        $found = 0;
-        return view('user.daftar.pilihpuskes', compact('found'));
+        $puskes = M_puskesmas::get();
+        return view('user.daftar.pilihpuskes', compact('puskes'));
     }
 
     public function puskesmas($namapuskes)
     {
         $puskesmas = $namapuskes;
-        return view('user.daftar.pilihasuransi', compact('puskesmas'));
+        $namaDB = M_puskesmas::where('kode', $namapuskes)->first();
+        try {
+            $check = DB::connection($namaDB->db)->getPDO();
+            return view('user.daftar.pilihasuransi', compact('puskesmas'));
+        } catch (\Exception $e) {
+            toastr()->error('BELUM ONLINE');
+            return back();
+        }
     }
 
     public function bpjs($namapuskes)
@@ -34,7 +42,8 @@ class PasienController extends Controller
     public function umum($namapuskes)
     {
         $poli = M_poli::where('poliSakit', 1)->get();
-        return view('user.daftar.formumum', compact('poli', 'namapuskes'));
+        $puskes = M_puskesmas::where('kode', $namapuskes)->first();
+        return view('user.daftar.formumum', compact('poli', 'puskes'));
     }
 
     public function simpanPendaftaran(Request $req)

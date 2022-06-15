@@ -15,9 +15,10 @@
                         <i class="fa fa-hospital text-c-blue d-block f-40"></i>
                         <h4 class="m-t-20"> Pilih Puskemas
                         </h4>
-                        <a href="/user/daftarpasien/puskesmas/banjarmasinindah"
-                            class="btn btn-primary btn-block btn-md btn-round">BANJARMASIN
-                            INDAH</a>
+                        @foreach ($puskes as $item)
+                        <a href="/user/daftarpasien/puskesmas/{{$item->kode}}"
+                            class="btn btn-primary btn-block btn-md btn-round">{{$item->nama}}</a>
+                        @endforeach
                         {{-- <div class="form-group row">
 
                             <label class="col-sm-2 col-form-label">Puskesmas</label>
@@ -55,150 +56,7 @@
                 </form>
             </div>
         </div>
-        @if ($found == 0)
 
-        @elseif($found == 1)
-        <div class="col-md-12 col-lg-12">
-            <div class="card">
-                <form method="post" action="/user/daftarpasien">
-                    @csrf
-                    <div class="card-block text-center">
-                        <i class="fa fa-user text-c-blue d-block f-40"></i>
-                        <h4 class="m-t-20"> Daftar Pasien Baru
-                        </h4>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">NIK</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nik" value="{{old('nik')}}" required>
-                                <input type="hidden" class="form-control" name="db" value="{{$db}}" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Nama</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nama" value="{{old('nama')}}" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Jenis Kelamin</label>
-                            <div class="col-sm-10">
-                                <select name="jenis_kelamin" class="form-control" required>
-                                    <option value="">-gender-</option>
-                                    <option value="L" {{old('jenis_kelamin')=='L' ? 'selected' :''}}>
-                                        Laki-Laki</option>
-                                    <option value="P" {{old('jenis_kelamin')=='P' ? 'selected' :''}}>
-                                        Perempuan</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" name="tanggal_lahir" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Pilih Poli</label>
-                            <div class="col-sm-10">
-                                <select name="poli" class="form-control" required>
-                                    <option value="">-poli-</option>
-                                    @foreach ($poli as $item)
-                                    <option value="{{$item->id}}">{{$item->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Tanggal Daftar</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" name="tanggal"
-                                    min={{\Carbon\Carbon::today()->format('Y-m-d')}}
-                                max={{\Carbon\Carbon::today()->addDays(1)->format('Y-m-d')}} required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary btn-block">Simpan</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        @elseif($found == 2)
-        <div class="col-md-12 col-lg-12">
-            <div class="card">
-                <form method="post" action="/user/daftarpasien">
-                    @csrf
-                    <div class="card-block text-center">
-                        <i class="fa fa-user text-c-blue d-block f-40"></i>
-                        <h4 class="m-t-20"> Data Pasien Ditemukan
-                        </h4>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">NIK</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nik" value="{{old('nik')}}" readonly>
-                                <input type="hidden" class="form-control" name="db" value="{{$db}}" readonly>
-                                <input type="hidden" class="form-control" name="daftarpoli" value="1" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Nama</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nama" value="{{$data->nama}}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Jenis Kelamin</label>
-                            <div class="col-sm-10">
-                                <select name="jenis_kelamin" class="form-control" readonly>
-                                    <option value="">-gender-</option>
-                                    <option value="L" {{$data->jenis_kelamin =='L' ? 'selected' :''}}>
-                                        Laki-Laki</option>
-                                    <option value="P" {{$data->jenis_kelamin =='P' ? 'selected' :''}}>
-                                        Perempuan</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" name="tanggal_lahir"
-                                    value="{{$data->tanggal_lahir}}" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Pilih Poli</label>
-                            <div class="col-sm-10">
-                                <select name="poli" class="form-control" required>
-                                    <option value="">-poli-</option>
-                                    @foreach ($poli as $item)
-                                    <option value="{{$item->id}}">{{$item->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Tanggal Daftar</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" name="tanggal"
-                                    min={{\Carbon\Carbon::today()->format('Y-m-d')}}
-                                max={{\Carbon\Carbon::today()->addDays(1)->format('Y-m-d')}} required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary btn-block">Simpan</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        @endif
     </div>
 </div>
 @endsection
