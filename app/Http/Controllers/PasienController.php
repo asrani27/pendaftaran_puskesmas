@@ -187,137 +187,62 @@ class PasienController extends Controller
 
     public function simpanPendaftaranBpjs(Request $req)
     {
-        dd(request()->all());
-        if ($req->button == 'check') {
-            //check ke pcare
-            if ($req->noKartu == null) {
-                toastr()->error('NO KARTU KOSONG');
-                $req->flash();
-                return back();
-            }
-
-            if (strlen($req->noKartu) != 13) {
-                toastr()->error('JUMLAH NO BPJS HARUS 13');
-                $req->flash();
-                return back();
-            }
-
+        DB::beginTransaction();
+        try {
             $namaDB = M_puskesmas::where('kode', $req->kode)->first();
+            $p = new Pendaftaran;
+            $p->puskesmas = $namaDB->db;
+            $p->jenis = $req->jenis;
+            $p->noKartu = $req->noKartu;
+            $p->nama = $req->nama;
+            $p->jkel = $req->jenis_kelamin;
+            $p->tgl_lahir = $req->tanggal_lahir;
+            $p->tgl_daftar = $req->tanggal;
+            $p->user_id = Auth::user()->id;
+            $p->kdPoli = M_poli::where('kdPoli', $req->kdPoli)->first()->kdPoli;
+            $p->nmPoli = M_poli::where('kdPoli', $req->kdPoli)->first()->nmPoli;
+            $p->save();
 
-            $user = DB::connection($namaDB->db)->table('users')->first();
-
-            $cons_id = $user->cons_id;
-            $secret_key = $user->secret_key;
-            $username_pcare = $user->user_pcare;
-            $password_pcare = $user->pass_pcare;
-            $kdAplikasi = '095';
-
-            date_default_timezone_set('UTC');
-            $tStamp = strval(time() - strtotime('1970-01-01 00:00:00'));
-            $signature = hash_hmac('sha256', $cons_id . "&" . $tStamp, $secret_key, true);
-            $encodedSignature = base64_encode($signature);
-            $urlencodedSignature = urlencode($encodedSignature);
-
-            $Authorization = base64_encode($username_pcare . ':' . $password_pcare . ':' . $kdAplikasi);
-
-            $head['X-cons-id'] = $cons_id;
-            $head['X-Timestamp'] = $tStamp;
-            $head['X-Signature'] = $encodedSignature;
-            $head['X-Authorization'] = 'Basic ' . $Authorization;
-
-            try {
-
-                $client = new Client([
-                    'base_uri' => 'https://new-api.bpjs-kesehatan.go.id/pcare-rest-v3.0/',
+            $db = DB::connection($namaDB->db)->table('t_antrian')->where('tanggal', $req->tanggal)->where('kdPoli', $req->kdPoli)->get();
+            if ($db->count() == 0) {
+                $antrian = antrean(1);
+                DB::connection($namaDB->db)->table('t_antrian')->insert([
+                    'tanggal'       => $req->tanggal,
+                    'nama'          => $req->nama,
+                    'nik'           => $req->nik,
+                    'jenis_kelamin' => $req->jenis_kelamin,
+                    'tanggal_lahir' => $req->tanggal_lahir,
+                    'jenis'         => 'UMUM',
+                    'kdPoli'        => M_poli::where('kdPoli', $req->kdPoli)->first()->kdPoli,
+                    'nmPoli'        => M_poli::where('kdPoli', $req->kdPoli)->first()->nmPoli,
+                    'nomor_antrian' => $antrian,
+                    'pendaftaran_id' => $p->id,
                 ]);
+            } else {
 
-                $response = $client->request('GET', 'peserta/' . $req->noKartu, [
-                    'headers' => $head,
+                $antrian = antrean((int)$db->last()->nomor_antrian + 1);
+                DB::connection($namaDB->db)->table('t_antrian')->insert([
+                    'tanggal'       => $req->tanggal,
+                    'nama'          => $req->nama,
+                    'nik'           => $req->nik,
+                    'jenis_kelamin' => $req->jenis_kelamin,
+                    'tanggal_lahir' => $req->tanggal_lahir,
+                    'jenis'         => 'UMUM',
+                    'kdPoli'        => M_poli::where('kdPoli', $req->kdPoli)->first()->kdPoli,
+                    'nmPoli'        => M_poli::where('kdPoli', $req->kdPoli)->first()->nmPoli,
+                    'nomor_antrian' => $antrian,
+                    'pendaftaran_id' => $p->id,
                 ]);
-
-                $data = json_decode((string)$response->getBody())->response;
-
-                if ($data == null) {
-                    toastr()->error('NO BPJS TIDAK DITEMUKAN');
-                    $req->flash();
-                    return back();
-                }
-
-                $puskes = M_puskesmas::where('kode', $req->kode)->first();
-                if ($data->kdProviderPst->kdProvider != $req->kode) {
-                    toastr()->error('TIDAK BISA MENDAFTAR DI FASKES ' . $puskes->nama . ', ANDA TERDAFTAR DI FASKES ' . $data->kdProviderPst->nmProvider);
-                    $req->flash();
-                    return back();
-                }
-                $poli = M_poli::where('poliSakit', 1)->get();
-
-                $req->flash();
-                return view('user.daftar.formbpjs', compact('data', 'puskes', 'poli'));
-            } catch (\Exception $e) {
-                toastr()->error('GAGAL CHECK DATA, BRIDGING SEDANG GANGGUAN');
-                $req->flash();
-                return back();
             }
-        } else {
-            //simpan
-
-            DB::beginTransaction();
-            try {
-                $p = new Pendaftaran;
-                $p->puskesmas = $req->puskesmas;
-                $p->jenis = $req->jenis;
-                $p->noKartu = $req->noKartu;
-                $p->nama = $req->nama;
-                $p->jkel = $req->jenis_kelamin;
-                $p->tgl_lahir = $req->tanggal_lahir;
-                $p->tgl_daftar = $req->tanggal;
-                $p->user_id = Auth::user()->id;
-                $p->kdPoli = M_poli::where('kdPoli', $req->kdPoli)->first()->kdPoli;
-                $p->nmPoli = M_poli::where('kdPoli', $req->kdPoli)->first()->nmPoli;
-                $p->save();
-
-                $db = DB::connection($req->puskesmas)->table('t_antrian')->where('tanggal', $req->tanggal)->where('kdPoli', $req->kdPoli)->get();
-                if ($db->count() == 0) {
-                    $antrian = antrean(1);
-                    DB::connection($req->puskesmas)->table('t_antrian')->insert([
-                        'tanggal'       => $req->tanggal,
-                        'nama'          => $req->nama,
-                        'nik'           => $req->nik,
-                        'jenis_kelamin' => $req->jenis_kelamin,
-                        'tanggal_lahir' => $req->tanggal_lahir,
-                        'jenis'         => 'UMUM',
-                        'kdPoli'        => M_poli::where('kdPoli', $req->kdPoli)->first()->kdPoli,
-                        'nmPoli'        => M_poli::where('kdPoli', $req->kdPoli)->first()->nmPoli,
-                        'nomor_antrian' => $antrian,
-                        'pendaftaran_id' => $p->id,
-                    ]);
-                } else {
-
-                    $antrian = antrean((int)$db->last()->nomor_antrian + 1);
-                    DB::connection($req->puskesmas)->table('t_antrian')->insert([
-                        'tanggal'       => $req->tanggal,
-                        'nama'          => $req->nama,
-                        'nik'           => $req->nik,
-                        'jenis_kelamin' => $req->jenis_kelamin,
-                        'tanggal_lahir' => $req->tanggal_lahir,
-                        'jenis'         => 'UMUM',
-                        'kdPoli'        => M_poli::where('kdPoli', $req->kdPoli)->first()->kdPoli,
-                        'nmPoli'        => M_poli::where('kdPoli', $req->kdPoli)->first()->nmPoli,
-                        'nomor_antrian' => $antrian,
-                        'pendaftaran_id' => $p->id,
-                    ]);
-                }
-                //dd($db, $req->all());
-                DB::commit();
-                toastr()->success('Pendaftaran Berhasil');
-                return redirect('/user/home');
-            } catch (\Exception $e) {
-                DB::rollback();
-                toastr()->error('Gagal Menyimpan');
-                return back();
-            }
+            //dd($db, $req->all());
+            DB::commit();
+            toastr()->success('Pendaftaran Berhasil');
+            return redirect('/user/home');
+        } catch (\Exception $e) {
+            DB::rollback();
+            toastr()->error('Gagal Menyimpan');
+            return back();
         }
-        dd($req->all());
     }
     public function checkPasien(Request $req)
     {
