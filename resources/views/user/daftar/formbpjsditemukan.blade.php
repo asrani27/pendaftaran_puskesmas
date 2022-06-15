@@ -33,7 +33,8 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">NO KARTU</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="noKartu" value="{{$data->noKartu}}">
+                                <input type="text" class="form-control" name="noKartu" value="{{$data->noKartu}}"
+                                    readonly>
                             </div>
                         </div>
                         <div class="form-group row">
