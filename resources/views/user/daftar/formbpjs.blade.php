@@ -18,7 +18,9 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">PUSKESMAS</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="puskesmas" value="{{$namapuskes}}"
+                                <input type="text" class="form-control" name="puskesmas" value="{{$puskes->nama}}"
+                                    readonly>
+                                <input type="hidden" class="form-control" name="kode" value="{{$puskes->kode}}"
                                     readonly>
                             </div>
                         </div>
@@ -53,9 +55,9 @@
                             <div class="col-sm-10">
                                 <select name="jenis_kelamin" class="form-control">
                                     <option value="">-gender-</option>
-                                    <option value="L" {{old('jenis_kelamin')=='L' ? 'selected' :''}}>
+                                    <option value="L" {{$data==null ? '' :$data->sex =='L' ? 'selected' :''}}>
                                         Laki-Laki</option>
-                                    <option value="P" {{old('jenis_kelamin')=='P' ? 'selected' :''}}>
+                                    <option value="P" {{$data==null ? '' :$data->sex =='P' ? 'selected' :''}}>
                                         Perempuan</option>
                                 </select>
                             </div>
@@ -63,7 +65,8 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" name="tanggal_lahir">
+                                <input type="date" class="form-control" name="tanggal_lahir"
+                                    value="{{$data == null ? '':\Carbon\Carbon::createFromFormat('d-m-Y',$data->tglLahir)->format('Y-m-d')}}">
                             </div>
                         </div>
                         <div class="form-group row">

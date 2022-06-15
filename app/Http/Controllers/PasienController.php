@@ -24,7 +24,7 @@ class PasienController extends Controller
         $puskesmas = $namapuskes;
         $namaDB = M_puskesmas::where('kode', $namapuskes)->first();
         try {
-            $check = DB::connection($namaDB->db)->getPDO();
+            $check = DB::connection($namaDB->db)->table('users')->get();
             return view('user.daftar.pilihasuransi', compact('puskesmas'));
         } catch (\Exception $e) {
             toastr()->error('BELUM ONLINE');
@@ -36,7 +36,8 @@ class PasienController extends Controller
     {
         $poli = M_poli::where('poliSakit', 1)->get();
         $data = null;
-        return view('user.daftar.formbpjs', compact('poli', 'namapuskes', 'data'));
+        $puskes = M_puskesmas::where('kode', $namapuskes)->first();
+        return view('user.daftar.formbpjs', compact('poli', 'puskes', 'data'));
     }
 
     public function umum($namapuskes)
@@ -49,9 +50,12 @@ class PasienController extends Controller
     public function simpanPendaftaran(Request $req)
     {
         //dd($req->all());
+        DB::beginTransaction();
         try {
+            $namaDB = M_puskesmas::where('kode', $req->kode)->first();
+
             $p = new Pendaftaran;
-            $p->puskesmas = $req->puskesmas;
+            $p->puskesmas = $namaDB->db;
             $p->jenis = $req->jenis;
             $p->nik = $req->nik;
             $p->nama = $req->nama;
@@ -63,10 +67,11 @@ class PasienController extends Controller
             $p->nmPoli = M_poli::where('kdPoli', $req->kdPoli)->first()->nmPoli;
             $p->save();
 
-            $db = DB::connection($req->puskesmas)->table('t_antrian')->where('tanggal', $req->tanggal)->where('kdPoli', $req->kdPoli)->get();
+
+            $db = DB::connection($namaDB->db)->table('t_antrian')->where('tanggal', $req->tanggal)->where('kdPoli', $req->kdPoli)->get();
             if ($db->count() == 0) {
                 $antrian = antrean(1);
-                DB::connection($req->puskesmas)->table('t_antrian')->insert([
+                DB::connection($namaDB->db)->table('t_antrian')->insert([
                     'tanggal'       => $req->tanggal,
                     'nama'          => $req->nama,
                     'nik'           => $req->nik,
@@ -81,7 +86,7 @@ class PasienController extends Controller
             } else {
 
                 $antrian = antrean((int)$db->last()->nomor_antrian + 1);
-                DB::connection($req->puskesmas)->table('t_antrian')->insert([
+                DB::connection($namaDB->db)->table('t_antrian')->insert([
                     'tanggal'       => $req->tanggal,
                     'nama'          => $req->nama,
                     'nik'           => $req->nik,
@@ -95,9 +100,12 @@ class PasienController extends Controller
                 ]);
             }
             //dd($db, $req->all());
+            DB::commit();
             toastr()->success('Pendaftaran Berhasil');
             return redirect('/user/home');
         } catch (\Exception $e) {
+
+            DB::rollback();
             toastr()->error('Gagal Menyimpan');
             return back();
         }
@@ -119,7 +127,9 @@ class PasienController extends Controller
                 return back();
             }
 
-            $user = DB::connection($req->puskesmas)->table('users')->first();
+            $namaDB = M_puskesmas::where('kode', $req->kode)->first();
+
+            $user = DB::connection($namaDB->db)->table('users')->first();
 
             $cons_id = $user->cons_id;
             $secret_key = $user->secret_key;
@@ -159,7 +169,7 @@ class PasienController extends Controller
                 }
 
                 $puskesmas = $req->puskesmas;
-                dd($data);
+                
                 return view('user.daftar.formbpjs', compact('data', 'puskesmas'));
             } catch (\Exception $e) {
                 toastr()->error('GAGAL CHECK DATA, BRIDGING SEDANG GANGGUAN');
