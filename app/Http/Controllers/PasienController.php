@@ -176,6 +176,7 @@ class PasienController extends Controller
             $poli = M_poli::where('poliSakit', 1)->get();
 
             request()->flash();
+            toastr()->success('NO BPJS DITEMUKAN');
             return view('user.daftar.formbpjsditemukan', compact('data', 'puskes', 'poli'));
         } catch (\Exception $e) {
             toastr()->error('GAGAL CHECK DATA, BRIDGING SEDANG GANGGUAN');
