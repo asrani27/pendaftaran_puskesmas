@@ -239,6 +239,7 @@ class PasienController extends Controller
             toastr()->success('Pendaftaran Berhasil');
             return redirect('/user/home');
         } catch (\Exception $e) {
+            dd($e);
             DB::rollback();
             toastr()->error('Gagal Menyimpan');
             return back();
