@@ -127,7 +127,6 @@ class PasienController extends Controller
                 return back();
             }
 
-
             $namaDB = M_puskesmas::where('kode', $req->kode)->first();
 
             $user = DB::connection($namaDB->db)->table('users')->first();
@@ -170,6 +169,11 @@ class PasienController extends Controller
                 }
 
                 $puskes = M_puskesmas::where('kode', $req->kode)->first();
+                if ($data->kdProviderPst->kdProvider != $req->kode) {
+                    toastr()->error('TIDAK BISA MENDAFTAR DI FASKES ', .$puskes->nama.', ANDA TERDAFTAR DI FASKES '.$data->kdProviderPst->nmProvider);
+                    $req->flash();
+                    return back();
+                }
                 $poli = M_poli::where('poliSakit', 1)->get();
 
                 $req->flash();
@@ -181,6 +185,8 @@ class PasienController extends Controller
             }
         } else {
             //simpan
+
+            DB::beginTransaction();
             try {
                 $p = new Pendaftaran;
                 $p->puskesmas = $req->puskesmas;
@@ -227,9 +233,11 @@ class PasienController extends Controller
                     ]);
                 }
                 //dd($db, $req->all());
+                DB::commit();
                 toastr()->success('Pendaftaran Berhasil');
                 return redirect('/user/home');
             } catch (\Exception $e) {
+                DB::rollback();
                 toastr()->error('Gagal Menyimpan');
                 return back();
             }
