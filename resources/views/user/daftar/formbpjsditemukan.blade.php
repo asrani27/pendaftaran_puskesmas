@@ -67,7 +67,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Pilih Poli</label>
                             <div class="col-sm-10">
-                                <select name="kdPoli" class="form-control">
+                                <select name="kdPoli" class="form-control" required>
                                     <option value="">-poli-</option>
                                     @foreach ($poli as $item)
                                     <option value="{{$item->kdPoli}}">{{$item->nmPoli}}</option>
@@ -80,7 +80,7 @@
                             <div class="col-sm-10">
                                 <input type="date" class="form-control" name="tanggal"
                                     min={{\Carbon\Carbon::today()->format('Y-m-d')}}
-                                max={{\Carbon\Carbon::today()->addDays(1)->format('Y-m-d')}}>
+                                max={{\Carbon\Carbon::today()->addDays(1)->format('Y-m-d')}} required>
                             </div>
                         </div>
                         <div class="form-group row">
