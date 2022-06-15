@@ -16,7 +16,7 @@ class HomeController extends Controller
 
         $data->getCollection()->transform(function ($item) {
             $d =  DB::connection($item->puskesmas)->table('t_antrian')->where('pendaftaran_id', $item->id)->first();
-            $s =  DB::connection($item->puskesmas)->table('t_antrian')->where('tanggal', $item->tgl_daftar)->where('kdPoli', $item->kdPoli)->where('status', '!=', 3)->where('pendaftaran_id', '<=', $item->id)->count();
+            $s =  DB::connection($item->puskesmas)->table('t_antrian')->where('tanggal', $item->tgl_daftar)->where('kdPoli', $item->kdPoli)->where('status', '!=', 3)->where('pendaftaran_id', '<', $item->id)->count();
 
             $item->antrian = $d->nomor_antrian;
             $item->sisa_antrian = $s;
