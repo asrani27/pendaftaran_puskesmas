@@ -56,7 +56,9 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{$item->sisa_antrian}}
+                                        {{$item->sisa_antrian}}<br />
+
+                                        Perkiraan : {{$item->sisa_antrian * 3}} Menit
                                     </td>
                                 </tr>
                                 @endforeach
