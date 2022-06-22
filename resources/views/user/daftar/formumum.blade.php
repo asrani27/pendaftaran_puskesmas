@@ -33,7 +33,8 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">NIK</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nik" value="{{old('nik')}}" required>
+                                <input type="text" class="form-control" name="nik" value="{{old('nik')}}"
+                                    onkeypress="return hanyaAngka(event)" maxlength="16" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -96,5 +97,13 @@
 @endsection
 
 @push('js')
+<script>
+    function hanyaAngka(evt) {
+      var charCode = (evt.which) ? evt.which : event.keyCode
+       if (charCode > 31 && (charCode < 48 || charCode > 57))
 
+        return false;
+      return true;
+    }
+</script>
 @endpush
