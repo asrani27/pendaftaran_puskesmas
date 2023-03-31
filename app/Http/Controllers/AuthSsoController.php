@@ -22,7 +22,7 @@ class AuthSsoController extends Controller
 
     public function register(Request $req)
     {
-        return response()->json('tesr');
+        return response()->json($req->all());
         $req->validate([
             'name'   => 'required|string|max:255',
             'email'  => 'required|string|email|max:255',
