@@ -267,7 +267,7 @@
         formData.append('_token', '{{ csrf_token() }}');
         $.ajax({
             type: "POST",
-            url: "{{ url('/sso/registers') }}",
+            url: "",
             data: formData,
             processData: false,
             contentType: false,
