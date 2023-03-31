@@ -267,7 +267,7 @@
         formData.append('_token', '{{ csrf_token() }}');
         $.ajax({
             type: "POST",
-            url: "{{ url('/sso/register') }}",
+            url: "https://baapik.banjarmasinkota.go.id/sso/register",
             data: formData,
             processData: false,
             contentType: false,
@@ -276,7 +276,7 @@
                     console.log(data);
                 // $(".is-invalid").removeClass("is-invalid");
                 if (data['status'] == true) {
-                    window.location.replace("{{ url('/user/home') }}");
+                    window.location.replace("https://baapik.banjarmasinkota.go.id/user/home");
                     //location.reload();
                 }
                 else {
