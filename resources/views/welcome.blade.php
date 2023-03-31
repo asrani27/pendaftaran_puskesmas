@@ -113,8 +113,74 @@
           <div class="blog-item-wrapper">
             <div class="blog-item-text">
               <h3><a href="#"><i class="fas fa-hospital"></i> Banjarmasin Indah</a></h3>
-              <p><i class="fas fa-map-marker-alt"></i> Jl ....</p>
-              <p><i class="fas fa-phone"></i> Telp</p>
+              {{-- <p><i class="fas fa-map-marker-alt"></i> Jl ....</p>
+              <p><i class="fas fa-phone"></i> Telp</p> --}}
+              <p><i class="fas fa-clock"></i> 08:00 - 12:00</p>
+            </div>
+          </div>
+          <!-- Blog Item Wrapper Ends-->
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
+          <!-- Blog Item Starts -->
+          <div class="blog-item-wrapper">
+            <div class="blog-item-text">
+              <h3><a href="#"><i class="fas fa-hospital"></i> Kayu Tangi</a></h3>
+              {{-- <p><i class="fas fa-map-marker-alt"></i> Jl ....</p>
+              <p><i class="fas fa-phone"></i> Telp</p> --}}
+              <p><i class="fas fa-clock"></i> 08:00 - 12:00</p>
+            </div>
+          </div>
+          <!-- Blog Item Wrapper Ends-->
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
+          <!-- Blog Item Starts -->
+          <div class="blog-item-wrapper">
+            <div class="blog-item-text">
+              <h3><a href="#"><i class="fas fa-hospital"></i> Sungai Mesa</a></h3>
+              {{-- <p><i class="fas fa-map-marker-alt"></i> Jl ....</p>
+              <p><i class="fas fa-phone"></i> Telp</p> --}}
+              <p><i class="fas fa-clock"></i> 08:00 - 12:00</p>
+            </div>
+          </div>
+          <!-- Blog Item Wrapper Ends-->
+        </div>
+        <!-- End Col -->
+      </div>
+
+      <div class="row">
+
+        <!-- Start Col -->
+        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
+          <!-- Blog Item Starts -->
+          <div class="blog-item-wrapper">
+            <div class="blog-item-text">
+              <h3><a href="#"><i class="fas fa-hospital"></i> Sungai Jingah</a></h3>
+              {{-- <p><i class="fas fa-map-marker-alt"></i> Jl ....</p>
+              <p><i class="fas fa-phone"></i> Telp</p> --}}
+              <p><i class="fas fa-clock"></i> 08:00 - 12:00</p>
+            </div>
+          </div>
+          <!-- Blog Item Wrapper Ends-->
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
+          <!-- Blog Item Starts -->
+          <div class="blog-item-wrapper">
+            <div class="blog-item-text">
+              <h3><a href="#"><i class="fas fa-hospital"></i> Karang Mekar</a></h3>
+              {{-- <p><i class="fas fa-map-marker-alt"></i> Jl ....</p>
+              <p><i class="fas fa-phone"></i> Telp</p> --}}
+              <p><i class="fas fa-clock"></i> 08:00 - 12:00</p>
+            </div>
+          </div>
+          <!-- Blog Item Wrapper Ends-->
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
+          <!-- Blog Item Starts -->
+          <div class="blog-item-wrapper">
+            <div class="blog-item-text">
+              <h3><a href="#"><i class="fas fa-hospital"></i> Terminal</a></h3>
+              {{-- <p><i class="fas fa-map-marker-alt"></i> Jl ....</p>
+              <p><i class="fas fa-phone"></i> Telp</p> --}}
               <p><i class="fas fa-clock"></i> 08:00 - 12:00</p>
             </div>
           </div>
