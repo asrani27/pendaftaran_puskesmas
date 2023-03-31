@@ -267,7 +267,7 @@
         formData.append('_token', '{{ csrf_token() }}');
         $.ajax({
             type: "POST",
-            url: "{{ route('sso.register') }}",
+            url: "{{ url('/sso/register') }}",
             data: formData,
             processData: false,
             contentType: false,
@@ -275,15 +275,15 @@
             success: function(data, textStatus, jqXHR) {
                     console.log(data);
                 // $(".is-invalid").removeClass("is-invalid");
-                // if (data['status'] == true) {
-                //     window.location.replace("{{ url('/user/home') }}");
-                //     //location.reload();
-                // }
-                // else {
-                //     console.log(data['message']);
-                //     toastr.error(data['message']);
-                //     $("div").removeClass("loadingsso");
-                // }  
+                if (data['status'] == true) {
+                    window.location.replace("{{ url('/user/home') }}");
+                    //location.reload();
+                }
+                else {
+                    console.log(data['message']);
+                    toastr.error(data['message']);
+                    $("div").removeClass("loadingsso");
+                }  
             },
             error: function(data, textStatus, jqXHR) {
                 console.log(data);
